@@ -1,0 +1,46 @@
+-- Project Structure
+
+1. DataAccess ->  respository
+2. Presentation - view 
+3. Business Logic Layer (?) utility , chg grade
+
+----Database-----------
+1. Table Relationship in Code First Implementation
+
+----.Net---------------
+1. Virtual in collections
+2. ICollection
+3. IList
+4. ISet
+5. Maps
+6. Dictioary
+7. Arrays
+8. Reflection
+9. Object
+10. MT
+11. async/sync 
+12. Delegate / Events and callback functions
+13. Execution life cycle
+14. IEnumerable & IEnumerator
+15. Collections
+16. ArrayList / IList
+17. Performance
+18. Services / Consume / Writing Services
+19. 
+20.
+
+--Front end basics---
+1. Java Script/ Ajax / Jquery
+2. HTML/ CSS 
+3. Bootstrap
+4. CSS
+
+
+ MVC framework
+----Common DP----
+1. Repository Pattern
+
+--Testing--
+1. Test Methods
+
+
