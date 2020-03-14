@@ -26,8 +26,8 @@
 16. ArrayList / IList
 17. Performance
 18. Services / Consume / Writing Services
-19. 
-20.
+19. Read Core a bit
+20. HttpContext and Sessions and Cookies
 
 --Front end basics---
 1. Java Script/ Ajax / Jquery
@@ -43,4 +43,6 @@
 --Testing--
 1. Test Methods
 
-
+--Exceptions----
+1. Exception Handling
+2. CustomErrors -- ON / OFF / REMOTEONLY
