@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using Models;
 using Repos;
-using SchoolManagement.Models;
-using SchoolManagement.SchoolDB;
-using Utility;
+using SchoolSystem.Utility;
 
-namespace SchoolManagement.Controllers
+
+namespace SchoolSystem.Controllers
 {
     public class StudentsController : Controller
     {

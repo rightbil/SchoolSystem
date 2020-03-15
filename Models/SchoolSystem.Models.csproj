@@ -50,5 +50,11 @@
   <ItemGroup>
     <Compile Include="Student.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utility\SchoolSystem.Utility.csproj">
+      <Project>{b7d1978b-8c7f-46f1-a382-24531a14bf36}</Project>
+      <Name>SchoolSystem.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

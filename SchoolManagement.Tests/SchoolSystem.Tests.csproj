@@ -99,9 +99,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SchoolManagement\SchoolManagement.csproj">
+    <ProjectReference Include="..\SchoolManagement\SchoolSystem.MVC.csproj">
       <Project>{D55A6F65-80CF-4D4B-8B55-47D5B37F2BD1}</Project>
-      <Name>SchoolManagement</Name>
+      <Name>SchoolSystem.MVC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

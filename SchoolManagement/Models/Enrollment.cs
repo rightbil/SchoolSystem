@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace SchoolManagement.Models
+namespace SchoolSystem.Models
 {
    
 }

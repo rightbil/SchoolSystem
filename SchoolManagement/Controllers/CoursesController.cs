@@ -8,10 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using Models;
 using Repos;
-using SchoolManagement.Models;
-using SchoolManagement.SchoolDB;
 
-namespace SchoolManagement.Controllers
+
+
+namespace SchoolSystem.Controllers
 {
     public class CoursesController : Controller
     {

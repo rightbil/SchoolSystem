@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SchoolManagement;
-using SchoolManagement.Controllers;
+using SchoolSystem;
+using SchoolSystem.Controllers;
 
-namespace SchoolManagement.Tests.Controllers
+namespace SchoolSystem.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

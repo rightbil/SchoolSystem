@@ -46,3 +46,5 @@
 --Exceptions----
 1. Exception Handling
 2. CustomErrors -- ON / OFF / REMOTEONLY
+
+annotaions -on field, method and  class level / serialization or deserialization

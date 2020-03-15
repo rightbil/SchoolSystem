@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-namespace SchoolManagement.Controllers
+namespace SchoolSystem.Controllers
 {
     public class HomeController : Controller
     {

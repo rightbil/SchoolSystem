@@ -1,4 +1,4 @@
-﻿namespace Utility
+﻿namespace SchoolSystem.Utility
 {
     public class ActivityLogger
     {

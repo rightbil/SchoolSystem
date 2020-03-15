@@ -64,9 +64,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj">
+    <ProjectReference Include="..\Models\SchoolSystem.Models.csproj">
       <Project>{60239383-88be-4e06-9f7a-d137502ff008}</Project>
-      <Name>Models</Name>
+      <Name>SchoolSystem.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

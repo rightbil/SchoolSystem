@@ -7,7 +7,7 @@ using Models;
 using Repos;
 
 
-namespace SchoolManagement.Controllers
+namespace SchoolSystem.Controllers
 {
     public class TeachersController : Controller
     {
