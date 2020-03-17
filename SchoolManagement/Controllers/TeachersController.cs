@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Models;
-using Repos;
+using Repository;
 
 
 namespace SchoolSystem.Controllers
@@ -45,7 +45,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,EnrollmentDate")] Teacher teacher)
+        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,RegistrationDate")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,EnrollmentDate")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,RegistrationDate")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {

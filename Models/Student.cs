@@ -7,17 +7,24 @@ namespace Models
 
     public class Student
     {
+        public DateTime registrationDate;
+        public int StudentId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string EmailAddress { get; set; }
-        public String Password { get; set; }
+        public string Password { get; set; }
         public string PhoneNumber { get; set; }
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string Postalcode { get; set; }
-        public String photo { get; set; }
-        public String Comment { get; set; }
-        public String ImageUrl { get; set; }
-        public DateTime EnrollmentDate { get; set; }
+        public string Photo { get; set; }
+        public string Comment { get; set; }
+        public string ImageUrl { get; set; }
+        public DateTime RegisteredOn
+        {
+            get { return DateTime.Now; }
+            private set { value = DateTime.Now; }
+            
+        }
         public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
 }

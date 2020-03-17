@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Models;
 using SchoolSystem.Utility;
 
 namespace SchoolSystem.Models
@@ -12,32 +9,36 @@ namespace SchoolSystem.Models
 
     public class Student
     {
-        [Display(Name = "Student ID")] public int ID { get; set; }
+        [Key]
+        [Display(Name = "Student ID")]
+        public int StudentId { get; set; }
 
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last name is Required")]
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "You need to give a long enough first name")]
+
         public string LastName { get; set; }
 
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "First name is required")]
-        [StringLength(25, MinimumLength = 10, ErrorMessage = "You need to give a long enough first name")]
+        [StringLength(20, MinimumLength = 1, ErrorMessage = "You need to give a long enough last name")]
         public string FirstName { get; set; }
 
-        public DateTime EnrollmentDate { get; set; }
+        //public DateTime EnrollmentDate { get; set; }
 
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email Address")]
         [Required(ErrorMessage = "Email address is required")]
         public string EmailAddress { get; set; }
 
-        [DataType(DataType.Password)]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Confirm Email")]
         [Compare("EmailAddress", ErrorMessage = "Confirm email do not match")]
         public string ConfirmEmailAddress { get; set; }
 
         [Display(Name = "Password")]
         [Required(ErrorMessage = "Password is required")]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "Password length must be b/n 8 and 20")]
+        [StringLength(10, MinimumLength = 4, ErrorMessage = "Password length must be b/n 4 and 10")]
         [DataType(DataType.Password)]
         public String Password { get; set; }
 
@@ -56,25 +57,17 @@ namespace SchoolSystem.Models
         [Display(Name = "Date of Birth")]
         [Required(ErrorMessage = "Date of Birth is required")]
         [DataType(DataType.Date)]
-
         public string DateOfBirth { get; set; }
-
-
-
+        
         [Display(Name = "Zip Code")]
         [Required(ErrorMessage = "Zipcode is required")]
         [DataType(DataType.PostalCode)]
-
         public string Postalcode { get; set; }
-
 
         [Display(Name = "Photo")]
         [Required(ErrorMessage = "Photo need to be uploaded")]
-     
         [DataType(DataType.Upload)]
-        public String photo { get; set; }
-
-
+        public String Photo { get; set; }
 
         [Required(ErrorMessage = "Comment")]
         [DataType(DataType.MultilineText)]
@@ -83,13 +76,7 @@ namespace SchoolSystem.Models
         [Required(ErrorMessage = "Image Url")]
         [DataType(DataType.ImageUrl)]
         public String ImageUrl { get; set; }
-
-
-        //[DataType(DataType.Duration)]
-        //[DataType(DataType.Custom)]
-        //[DataType(DataType.Currency)]
-
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        //public virtual ICollection<Enrollment> Enrollments { get; set; }
 
     }
 }

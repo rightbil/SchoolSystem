@@ -23,7 +23,7 @@ namespace Models
         
         // public Teacher()
         // {
-        //     EnrollmentDate = DateTime.Now;
+        //     RegistrationDate = DateTime.Now;
         // }
         // public Teacher(string firstName, string lastName, String major, Course assignedCourses)
         // {
@@ -31,7 +31,7 @@ namespace Models
         //     this.LastName = lastName;
         //     this.Major = major;
         //     this.assignedCourses = assignedCourses;
-        //     this.EnrollmentDate = DateTime.Now;
+        //     this.RegistrationDate = DateTime.Now;
         //     
         // }
 

@@ -1,5 +1,6 @@
-﻿using Models;
+﻿
 using System;
+using Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repos
+namespace Repository
 {
     public class SchoolDbContext : DbContext
     {

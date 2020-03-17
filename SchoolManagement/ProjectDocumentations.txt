@@ -48,3 +48,46 @@
 2. CustomErrors -- ON / OFF / REMOTEONLY
 
 annotaions -on field, method and  class level / serialization or deserialization
+
+Scripting / Concepts
+
+1.	dependency injection
+2.	dependency injection container
+3.	HttpContext
+4.	Alex Wolf/ .Net Framework/ MVC architecture,
+    Improve MVC Application Performance
+5.	Filters and their types and sequences
+6.	Identity framework 2.0
+7.	async and wait
+8.	application poll {2 kinds}
+9.	interfaces
+10.	view Engines
+11.	IoC / DI
+12.	Authorization
+13.	HTTP handler 
+14.	Modules
+15.	View State
+16.	View Engine ( Razor) eg. View Method
+
+Reading Alex’s Video on PS
+1.	Both MVC and Web forms use HTTP Handler {MVC is built on top of ASP.NET }
+2.	MVC is a different way of implementation of the HTTP Handler?
+
+What really happens in MVC Frame Work
+ 
+1)	public class MvcApplication : System.Web.HttpApplication found in global.asax and inherits HttpApplication which is in ASP.NET 
+2)	The request life cycle is b/n the  Application Start and Application end life cycle
+a.	When does application start kick ? when it gets request –  www.google.com + enter
+b.	Application_Start  - we can put any thing we need to happen first. 
+c.	It contains
+i.	 Global filters (? Mule) ,
+ii.	 RegisterRoute,
+iii.	 Route tables and 
+iv.	BundleTable {scripts and css can be here after MVC 4}
+3.	The register route - is referring the register route from app-config where we write Controller/ Veiw/ Id etc 
+4.	 Routing request try to match the incoming url to the collection in RegisterRoutes
+1)	Note: Route are defined / added to the collection before anything happens.
+2)	M(what will happen if it did not fine a match – this is the server) how does it get the 404 error.
+5.	djdjjd
+
+6.	Each of the routes has associated RouteHandler class

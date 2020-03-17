@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateDbMig : DbMigration
+    public partial class Migrn0628 : DbMigration
     {
         public override void Up()
         {
@@ -11,11 +11,12 @@
                 "dbo.Courses",
                 c => new
                     {
-                        CourseID = c.Int(nullable: false),
+                        CourseId = c.Int(nullable: false, identity: true),
                         Title = c.String(),
                         Credits = c.Int(nullable: false),
+                        Price = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => t.CourseID);
+                .PrimaryKey(t => t.CourseId);
             
             CreateTable(
                 "dbo.Enrollments",
@@ -36,12 +37,20 @@
                 "dbo.Students",
                 c => new
                     {
-                        ID = c.Int(nullable: false, identity: true),
+                        StudentId = c.Int(nullable: false, identity: true),
                         LastName = c.String(),
-                        FirstMidName = c.String(),
-                        EnrollmentDate = c.DateTime(nullable: false),
+                        FirstName = c.String(),
+                        EmailAddress = c.String(),
+                        Password = c.String(),
+                        PhoneNumber = c.String(),
+                        DateOfBirth = c.DateTime(nullable: false),
+                        Postalcode = c.String(),
+                        Photo = c.String(),
+                        Comment = c.String(),
+                        ImageUrl = c.String(),
+                        RegistrationDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.ID);
+                .PrimaryKey(t => t.StudentId);
             
             CreateTable(
                 "dbo.Teachers",
@@ -52,20 +61,20 @@
                         FirstName = c.String(nullable: false),
                         EnrollmentDate = c.DateTime(nullable: false),
                         Major = c.String(nullable: false),
-                        courses_CourseID = c.Int(),
+                        assignedCourses_CourseId = c.Int(),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Courses", t => t.courses_CourseID)
-                .Index(t => t.courses_CourseID);
+                .ForeignKey("dbo.Courses", t => t.assignedCourses_CourseId)
+                .Index(t => t.assignedCourses_CourseId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Teachers", "courses_CourseID", "dbo.Courses");
+            DropForeignKey("dbo.Teachers", "assignedCourses_CourseId", "dbo.Courses");
             DropForeignKey("dbo.Enrollments", "StudentID", "dbo.Students");
             DropForeignKey("dbo.Enrollments", "CourseID", "dbo.Courses");
-            DropIndex("dbo.Teachers", new[] { "courses_CourseID" });
+            DropIndex("dbo.Teachers", new[] { "assignedCourses_CourseId" });
             DropIndex("dbo.Enrollments", new[] { "StudentID" });
             DropIndex("dbo.Enrollments", new[] { "CourseID" });
             DropTable("dbo.Teachers");

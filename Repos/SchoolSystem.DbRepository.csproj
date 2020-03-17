@@ -51,9 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202003011943504_CreateDbMig.cs" />
-    <Compile Include="Migrations\202003011943504_CreateDbMig.designer.cs">
-      <DependentUpon>202003011943504_CreateDbMig.cs</DependentUpon>
+    <Compile Include="Migrations\202003162235534_Migrn0628.cs" />
+    <Compile Include="Migrations\202003162235534_Migrn0628.designer.cs">
+      <DependentUpon>202003162235534_Migrn0628.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003170211199_Migrn1011.cs" />
+    <Compile Include="Migrations\202003170211199_Migrn1011.designer.cs">
+      <DependentUpon>202003170211199_Migrn1011.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +74,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003011943504_CreateDbMig.resx">
-      <DependentUpon>202003011943504_CreateDbMig.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003162235534_Migrn0628.resx">
+      <DependentUpon>202003162235534_Migrn0628.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003170211199_Migrn1011.resx">
+      <DependentUpon>202003170211199_Migrn1011.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

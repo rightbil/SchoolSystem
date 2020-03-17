@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
-using Repos;
+using Repository;
 
 
 namespace SchoolSystem.Controllers

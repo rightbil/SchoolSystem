@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
-using Repos;
+using Repository;
 
 
 
@@ -20,14 +17,13 @@ namespace SchoolSystem.Controllers
         // GET: Courses
         public ActionResult Index()
         {
-            using (SchoolDbContext db = new SchoolDbContext())
-
-            {
-                //db.courses.Add(())
+           // using (SchoolDbContext db = new SchoolDbContext())
+            //{
+               // db.courses.Add();
 
                 return View(db.courses.ToList());
-            }
-        }
+         }
+        
  
 
         // GET: Courses/Details/5
@@ -56,7 +52,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseID,Title,Credits")] Course course)
+        public ActionResult Create([Bind(Include = "Title,Credits,Price")] Course course)
         {
             if (ModelState.IsValid)
             {

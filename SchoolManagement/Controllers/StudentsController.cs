@@ -1,10 +1,11 @@
 ﻿using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Models;
-using Repos;
+using Repository;
 using SchoolSystem.Utility;
 
 
@@ -15,52 +16,81 @@ namespace SchoolSystem.Controllers
         private SchoolDbContext db = new SchoolDbContext();
 
         private EmailSender sender = new EmailSender();
-       
-        
+
+
         // GET: Students
         public ActionResult Index()
         {
-            sender.SendEmail();
+           // sender.SendEmail();
             return View(db.students.ToList());
         }
 
-        // GET: Students/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Student student = db.students.Find(id);
-            if (student == null)
-            {
-                return HttpNotFound();
-            }
-            return View(student);
-        }
+        //// GET: Students/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Student student = db.students.Find(id);
+        //    if (student == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(student);
+        //}
 
         // GET: Students/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
-        // POST: Students/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,EnrollmentDate")] Student student)
-        {
-            if (ModelState.IsValid)
-            {
-                db.students.Add(student);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(student);
-        }
+
+            // POST: Students/Create
+            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+            // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+            [HttpPost]
+            [ValidateAntiForgeryToken]
+
+            public ActionResult Create(
+                
+                [Bind(Include ="ID,LastName,FirstName,EmailAddress, Password, PhoneNumber,DateOfBirth, PostalCode,Photo, Comment, ImageUrl,RegistrationDate,")]
+                Student student) //, HttpPostedFileBase file)
+            {
+                if (ModelState.IsValid)
+                { 
+                    /*
+
+                if (file != null)
+                {
+                    string pic = System.IO.Path.GetFileName(file.FileName);
+                    string path = System.IO.Path.Combine(
+                        Server.MapPath("~/images/profile"), pic);
+                    // file is uploaded
+                    file.SaveAs(path);
+
+                    // save the image path path to the database or you can send image 
+                    // directly to database
+                    // in-case if you want to store byte[] ie. for DB
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        file.InputStream.CopyTo(ms);
+                        byte[] array = ms.GetBuffer();
+                    }
+
+                }*/
+
+                db.students.Add(student);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                return View(student);
+            }
+        
 
         // GET: Students/Edit/5
         public ActionResult Edit(int? id)
@@ -82,7 +112,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,EnrollmentDate")] Student student)
+        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,RegistrationDate")] Student student)
         {
             if (ModelState.IsValid)
             {
