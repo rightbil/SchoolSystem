@@ -1,39 +1,34 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-namespace Models
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SchoolSystem.DbModels.Model
 {
+    [Table("tblTeacher")]
     public class Teacher
     {
+        /*private DateTime hireDate=DateTime.Now;*/
         /*[HiddenInput(DisplayValue=false)]*/
-        public int ID { get; set; }
-        [DisplayName("Last Name")]
-        [Required(ErrorMessage = "Last Name is required")]
+        [Key, Column("Teacher ID")]
+        public int TeacherId { get; set; }
+        [Column("Last Name")]
         public string LastName { get; set; }
-        [DisplayName("First Name")]
-        [Required(ErrorMessage = "First Name is required")]
+        [Column("First Name")]
         public string FirstName { get; set; }
-        public DateTime EnrollmentDate { get; private set; } = DateTime.Now;
+
+        [Column("Hire Date")] 
+        public DateTime HireDate { get; set; } = DateTime.Now;
+
         [Required(ErrorMessage = "Major is required")]
-        public String Major { get; set; }
-        public Course assignedCourses { get; set; }
-        
+        public string Major { get; set; }
+        public ICollection<Course> AssignedCourses { get; set; }
+
+        //public ICollection<Department> Departments { get; set; }
         /*public virtual ISet<Course> xcourses { get; set; }
         public virtual IList<Course> ycourses { get; set; }*/
         
-        // public Teacher()
-        // {
-        //     RegistrationDate = DateTime.Now;
-        // }
-        // public Teacher(string firstName, string lastName, String major, Course assignedCourses)
-        // {
-        //     this.FirstName = firstName;
-        //     this.LastName = lastName;
-        //     this.Major = major;
-        //     this.assignedCourses = assignedCourses;
-        //     this.RegistrationDate = DateTime.Now;
-        //     
-        // }
+       
 
     }
 }

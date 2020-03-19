@@ -143,7 +143,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CoursesController.cs" />
-    <Compile Include="Controllers\EnrollmentsController.cs" />
+    <Compile Include="Controllers\CourseEnrollmentsController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
@@ -151,7 +152,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\Enrollment.cs" />
+    <Compile Include="Models\CourseEnrollment.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -285,21 +287,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\View.cshtml" />
-    <Content Include="Views\Teachers\Create.cshtml" />
-    <Content Include="Views\Teachers\Delete.cshtml" />
-    <Content Include="Views\Teachers\Details.cshtml" />
-    <Content Include="Views\Teachers\Edit.cshtml" />
-    <Content Include="Views\Teachers\Index.cshtml" />
-    <Content Include="Views\Enrollments\Create.cshtml" />
-    <Content Include="Views\Enrollments\Delete.cshtml" />
-    <Content Include="Views\Enrollments\Details.cshtml" />
-    <Content Include="Views\Enrollments\Edit.cshtml" />
-    <Content Include="Views\Enrollments\Index.cshtml" />
-    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\CourseEnrollments\Create.cshtml" />
+    <Content Include="Views\CourseEnrollments\Delete.cshtml" />
+    <Content Include="Views\CourseEnrollments\Details.cshtml" />
+    <Content Include="Views\CourseEnrollments\Edit.cshtml" />
+    <Content Include="Views\CourseEnrollments\Index.cshtml" />
     <Content Include="Views\Courses\Details.cshtml" />
-    <Content Include="Views\Courses\Edit.cshtml" />
-    <Content Include="Views\Teachers\View.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -313,7 +306,22 @@
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Teachers\Create.cshtml" />
+    <Content Include="Views\Teachers\Delete.cshtml" />
+    <Content Include="Views\Teachers\Details.cshtml" />
+    <Content Include="Views\Teachers\Edit.cshtml" />
+    <Content Include="Views\Teachers\Index.cshtml" />
+    <Content Include="Views\Departments\Create.cshtml" />
+    <Content Include="Views\Departments\Delete.cshtml" />
+    <Content Include="Views\Departments\Details.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Departments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,13 +332,13 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\SchoolSystem.Models.csproj">
+    <ProjectReference Include="..\Models\SchoolSystem.DbModels.csproj">
       <Project>{60239383-88be-4e06-9f7a-d137502ff008}</Project>
-      <Name>SchoolSystem.Models</Name>
+      <Name>SchoolSystem.DbModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repos\SchoolSystem.DbRepository.csproj">
+    <ProjectReference Include="..\Repos\SchoolSystem.DbContext.csproj">
       <Project>{114baf0f-def8-4ad2-b60e-73059741695e}</Project>
-      <Name>SchoolSystem.DbRepository</Name>
+      <Name>SchoolSystem.DbContext</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utility\SchoolSystem.Utility.csproj">
       <Project>{b7d1978b-8c7f-46f1-a382-24531a14bf36}</Project>

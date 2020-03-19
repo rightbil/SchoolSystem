@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Models.Teacher>
+﻿@model IEnumerable<SchoolSystem.DbModels.Model.Teacher>
 
 @{
     ViewBag.Title = "Index";
@@ -19,9 +19,12 @@
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.DisplayNameFor(model => model.HireDate)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Major)
+        </th>
+        <th>Admin Panel</th>
     </tr>
 
 @foreach (var item in Model) {
@@ -33,20 +36,17 @@
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            @Html.DisplayFor(modelItem => item.HireDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.DisplayFor(modelItem => item.Major)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TeacherId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TeacherId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TeacherId })
         </td>
     </tr>
 }
 
 </table>
-@section scripts
-{
-    <script type="text/javascript">
-        /*$.ajax.document.load.__defineGetter__();*/
-    </script>
-}

@@ -1,4 +1,4 @@
-﻿@model Models.Teacher
+﻿@model SchoolSystem.DbModels.Model.Teacher
 
 @{
     ViewBag.Title = "Delete";
@@ -29,21 +29,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.DisplayNameFor(model => model.HireDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EnrollmentDate)
+            @Html.DisplayFor(model => model.HireDate)
         </dd>
-        
-        
+
         <dt>
-            @Html.DisplayFor(model=>model.Major)
-
+            @Html.DisplayNameFor(model => model.Major)
         </dt>
-        <dd>
-            @Html.DisplayFor(model=>model.Major)
 
+        <dd>
+            @Html.DisplayFor(model => model.Major)
         </dd>
 
     </dl>

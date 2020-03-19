@@ -5,14 +5,14 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Repository.SchoolDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<SchoolSystem.DbContext.SchoolDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Repository.SchoolDbContext context)
+        protected override void Seed(SchoolSystem.DbContext.SchoolDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

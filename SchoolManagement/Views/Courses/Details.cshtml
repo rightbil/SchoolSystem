@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.Models.Course
+﻿@model SchoolSystem.DbModels.Model.Course
 
 @{
     ViewBag.Title = "Details";
@@ -20,16 +20,22 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Credits)
+            @Html.DisplayNameFor(model => model.Credit)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Credits)
+            @Html.DisplayFor(model => model.Credit)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model=>model.Price)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CourseID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CourseId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

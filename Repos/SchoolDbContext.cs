@@ -1,20 +1,17 @@
 ﻿
-using System;
-using Models;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using SchoolSystem.DbModels.Model;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Repository
+namespace SchoolSystem.DbContext
+
 {
-    public class SchoolDbContext : DbContext
+    public class SchoolDbContext : System.Data.Entity.DbContext
     {
         public DbSet<Student> students { get; set; }
-        public DbSet<Enrollment> enrollments { get; set; }
+        public DbSet<CourseEnrollement> enrollments { get; set; }
         public DbSet<Course> courses { get; set; }
         public DbSet<Teacher> teachers { get; set; }
+
+        public System.Data.Entity.DbSet<SchoolSystem.DbModels.Model.Department> Departments { get; set; }
     }
 }

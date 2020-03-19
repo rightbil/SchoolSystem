@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
-using Models;
-using Repository;
+using SchoolSystem.DbContext;
+using SchoolSystem.DbModels.Model;
 
-
-namespace SchoolSystem.Controllers
+namespace SchoolManagement.Controllers
 {
     public class TeachersController : Controller
     {
@@ -45,7 +46,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,RegistrationDate")] Teacher teacher)
+        public ActionResult Create([Bind(Include = "TeacherId,LastName,FirstName,HireDate,Major")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +78,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,RegistrationDate")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "TeacherId,LastName,FirstName,HireDate,Major")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {

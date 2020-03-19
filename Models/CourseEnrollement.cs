@@ -1,12 +1,15 @@
-﻿namespace Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SchoolSystem.DbModels.Model
 {
     public enum Grade
     {
         A, B, C, D, F
     }
-    public class Enrollment
+    [Table("tblCourseEnrollement")]
+    public class CourseEnrollement
     {
-        public int EnrollmentID { get; set; }
+        public int CourseEnrollementId { get; set; }
         public int CourseID { get; set; }
         public int StudentID { get; set; }
         public Grade? Grade { get; set; }

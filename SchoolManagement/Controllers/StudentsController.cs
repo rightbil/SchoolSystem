@@ -1,44 +1,39 @@
 ﻿using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using Models;
-using Repository;
+using SchoolSystem.DbModels.Model;
+using SchoolSystem.DbContext;
 using SchoolSystem.Utility;
-
 
 namespace SchoolSystem.Controllers
 {
     public class StudentsController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
-
         private EmailSender sender = new EmailSender();
 
 
         // GET: Students
         public ActionResult Index()
         {
-           // sender.SendEmail();
-            return View(db.students.ToList());
+         return View(db.students.ToList());
         }
 
         //// GET: Students/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Student student = db.students.Find(id);
-        //    if (student == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(student);
-        //}
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Student student = db.students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+        }
 
         // GET: Students/Create
         public ActionResult Create()
@@ -57,7 +52,7 @@ namespace SchoolSystem.Controllers
 
             public ActionResult Create(
                 
-                [Bind(Include ="ID,LastName,FirstName,EmailAddress, Password, PhoneNumber,DateOfBirth, PostalCode,Photo, Comment, ImageUrl,RegistrationDate,")]
+                [Bind(Include ="ID,LastName,FirstName,EmailAddress, Password, PhoneNumber,DateOfBirth, PostalCode,Photo, Comment, ImageUrl")]
                 Student student) //, HttpPostedFileBase file)
             {
                 if (ModelState.IsValid)
@@ -112,7 +107,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,RegistrationDate")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentId,LastName,FirstName,EmailAddress,Password , PhoneNumber,DateOfBirth,Postalcode,Photo,Comment,ImageUrl,RegisteredOn")] Student student)
         {
             if (ModelState.IsValid)
             {

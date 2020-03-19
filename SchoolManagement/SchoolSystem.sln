@@ -17,17 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql", "Sql", "{FED6950A-AF6
 		SchoolMgmt.sql = SchoolMgmt.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DbRepository", "..\Repos\SchoolSystem.DbRepository.csproj", "{114BAF0F-DEF8-4AD2-B60E-73059741695E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DbContext", "..\Repos\SchoolSystem.DbContext.csproj", "{114BAF0F-DEF8-4AD2-B60E-73059741695E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.Utility", "..\Utility\SchoolSystem.Utility.csproj", "{B7D1978B-8C7F-46F1-A382-24531A14BF36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.Models", "..\Models\SchoolSystem.Models.csproj", "{60239383-88BE-4E06-9F7A-D137502FF008}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DbModels", "..\Models\SchoolSystem.DbModels.csproj", "{60239383-88BE-4E06-9F7A-D137502FF008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.Exceptions", "..\Exceptions\SchoolSystem.Exceptions.csproj", "{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DataLibrary", "..\DataLibrary\SchoolSystem.DataLibrary.csproj", "{E4CA1C21-B987-4EF9-B1E1-EE00CF04415F}"
-EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SchoolSystem.DB", "..\SchoolDB\SchoolSystem.DB.sqlproj", "{A90843F9-0EB4-4A3C-8C87-C845B4E8F431}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolSystem.Exceptions", "..\Exceptions\SchoolSystem.Exceptions.csproj", "{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,16 +55,6 @@ Global
 		{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E4CA1C21-B987-4EF9-B1E1-EE00CF04415F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4CA1C21-B987-4EF9-B1E1-EE00CF04415F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4CA1C21-B987-4EF9-B1E1-EE00CF04415F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4CA1C21-B987-4EF9-B1E1-EE00CF04415F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A90843F9-0EB4-4A3C-8C87-C845B4E8F431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A90843F9-0EB4-4A3C-8C87-C845B4E8F431}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A90843F9-0EB4-4A3C-8C87-C845B4E8F431}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{A90843F9-0EB4-4A3C-8C87-C845B4E8F431}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A90843F9-0EB4-4A3C-8C87-C845B4E8F431}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A90843F9-0EB4-4A3C-8C87-C845B4E8F431}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

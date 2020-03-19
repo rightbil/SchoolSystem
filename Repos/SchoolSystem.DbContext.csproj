@@ -51,13 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202003162235534_Migrn0628.cs" />
-    <Compile Include="Migrations\202003162235534_Migrn0628.designer.cs">
-      <DependentUpon>202003162235534_Migrn0628.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003170211199_Migrn1011.cs" />
-    <Compile Include="Migrations\202003170211199_Migrn1011.designer.cs">
-      <DependentUpon>202003170211199_Migrn1011.cs</DependentUpon>
+    <Compile Include="Migrations\202003190141026_mrgn.cs" />
+    <Compile Include="Migrations\202003190141026_mrgn.designer.cs">
+      <DependentUpon>202003190141026_mrgn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -68,17 +64,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Models\SchoolSystem.Models.csproj">
+    <ProjectReference Include="..\Models\SchoolSystem.DbModels.csproj">
       <Project>{60239383-88be-4e06-9f7a-d137502ff008}</Project>
-      <Name>SchoolSystem.Models</Name>
+      <Name>SchoolSystem.DbModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003162235534_Migrn0628.resx">
-      <DependentUpon>202003162235534_Migrn0628.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003170211199_Migrn1011.resx">
-      <DependentUpon>202003170211199_Migrn1011.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003190141026_mrgn.resx">
+      <DependentUpon>202003190141026_mrgn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
