@@ -56,5 +56,12 @@ namespace SchoolSystem.MVC.Models
         public String ImageUrl { get; set; }
         //public virtual ICollection<Enrollment> Enrollments { get; set; }
 
+        /* public Gender gender { get; set; } */
+    }
+
+    public enum Gender
+    {
+        Male,
+        Female
     }
 }

@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.DbModels.Model.Teacher
+﻿@model SchoolSystem.MVC.Models.Teacher
 
 @{
     ViewBag.Title = "Details";
@@ -43,9 +43,18 @@
             @Html.DisplayFor(model => model.Major)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.TeacherId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+

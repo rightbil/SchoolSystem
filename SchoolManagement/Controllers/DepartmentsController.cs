@@ -1,34 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using SchoolSystem.DbContext;
-using SchoolSystem.DbModels.Model;
-
+using SchoolSystem.MVC.Models;
 namespace SchoolManagement.Controllers
 {
     public class DepartmentsController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
 
-        // GET: Departments
         public ActionResult Index()
         {
-            return View(db.Departments.ToList());
+            var fromDb = db.departments.OrderBy(x => x.DepartmentName).ToList();
+            List<Department> listOfdepts = new List<Department>();
+            foreach (var d in fromDb)
+            {
+                listOfdepts.Add(
+
+                    new Department()
+                    {
+                         DepartmentId = d.DepartmentId,
+                        DepartmentName = d.DepartmentName,
+                        Capacity = d.Capacity
+
+                    }
+                    );
+            }
+
+            return View(listOfdepts);
         }
 
-        // GET: Departments/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+
+            var fromDb = db.departments.FirstOrDefault(x => x.DepartmentId == id);
+
+            Department department = new Department()
+            {
+                DepartmentId = fromDb.DepartmentId,
+                DepartmentName = fromDb.DepartmentName,
+                Capacity = fromDb.Capacity
+
+            };
             if (department == null)
             {
                 return HttpNotFound();
@@ -36,22 +56,26 @@ namespace SchoolManagement.Controllers
             return View(department);
         }
 
-        // GET: Departments/Create
+
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Departments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DepartmentId,DeptName,Capacity")] Department department)
+        public ActionResult Create([Bind(Include = "DepartmentId,DepartmentName,Capacity")] Department department)
         {
+            SchoolSystem.DbModels.Model.Department dept = new SchoolSystem.DbModels.Model.Department()
+            {
+                DepartmentName = department.DepartmentName,
+                Capacity = department.Capacity
+            };
+
             if (ModelState.IsValid)
             {
-                db.Departments.Add(department);
+                db.departments.Add(dept);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -59,45 +83,67 @@ namespace SchoolManagement.Controllers
             return View(department);
         }
 
-        // GET: Departments/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
-            if (department == null)
+            var fromDb = db.departments.FirstOrDefault(x => x.DepartmentId == id);
+
+            Department dept = new Department()
+            {
+                DepartmentId = fromDb.DepartmentId,
+                DepartmentName = fromDb.DepartmentName,
+                Capacity = fromDb.Capacity
+            };
+
+            if (dept == null)
             {
                 return HttpNotFound();
             }
-            return View(department);
+            return View(dept);
         }
 
-        // POST: Departments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DepartmentId,DeptName,Capacity")] Department department)
+        public ActionResult Edit([Bind(Include = "DepartmentId,DepartmentName,Capacity")] Department department)
+
+
+
         {
+            SchoolSystem.DbModels.Model.Department dept = new SchoolSystem.DbModels.Model.Department()
+            {
+                DepartmentId = department.DepartmentId,
+                DepartmentName = department.DepartmentName,
+                Capacity = department.Capacity
+
+            };
+            
             if (ModelState.IsValid)
             {
-                db.Entry(department).State = EntityState.Modified;
+                db.Entry(dept).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(department);
         }
 
-        // GET: Departments/Delete/5
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Department department = db.Departments.Find(id);
+            var fromDb = db.departments.Find(id);
+           Department department = new Department()
+            {
+                DepartmentId =  fromDb.DepartmentId,
+                DepartmentName = fromDb.DepartmentName,
+                Capacity = fromDb.Capacity
+            };
             if (department == null)
             {
                 return HttpNotFound();
@@ -105,13 +151,12 @@ namespace SchoolManagement.Controllers
             return View(department);
         }
 
-        // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Department department = db.Departments.Find(id);
-            db.Departments.Remove(department);
+            var fromDb = db.departments.FirstOrDefault(x=>x.DepartmentId==id);
+            db.departments.Remove(fromDb);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

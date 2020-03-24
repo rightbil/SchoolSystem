@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeOrder.cs" />
     <Compile Include="Course.cs" />
     <Compile Include="CourseEnrollement.cs" />
     <Compile Include="Department.cs" />

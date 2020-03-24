@@ -51,9 +51,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202003190141026_mrgn.cs" />
-    <Compile Include="Migrations\202003190141026_mrgn.designer.cs">
-      <DependentUpon>202003190141026_mrgn.cs</DependentUpon>
+    <Compile Include="Migrations\202003231513392_Migrn.cs" />
+    <Compile Include="Migrations\202003231513392_Migrn.designer.cs">
+      <DependentUpon>202003231513392_Migrn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003231524497_Migrn1.cs" />
+    <Compile Include="Migrations\202003231524497_Migrn1.designer.cs">
+      <DependentUpon>202003231524497_Migrn1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003240240046_Migrs.cs" />
+    <Compile Include="Migrations\202003240240046_Migrs.designer.cs">
+      <DependentUpon>202003240240046_Migrs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003240243347_Migrs1.cs" />
+    <Compile Include="Migrations\202003240243347_Migrs1.designer.cs">
+      <DependentUpon>202003240243347_Migrs1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003240316130_Migrs2.cs" />
+    <Compile Include="Migrations\202003240316130_Migrs2.designer.cs">
+      <DependentUpon>202003240316130_Migrs2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,8 +86,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003190141026_mrgn.resx">
-      <DependentUpon>202003190141026_mrgn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003231513392_Migrn.resx">
+      <DependentUpon>202003231513392_Migrn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003231524497_Migrn1.resx">
+      <DependentUpon>202003231524497_Migrn1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003240240046_Migrs.resx">
+      <DependentUpon>202003240240046_Migrs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003240243347_Migrs1.resx">
+      <DependentUpon>202003240243347_Migrs1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003240316130_Migrs2.resx">
+      <DependentUpon>202003240316130_Migrs2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

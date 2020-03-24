@@ -1,52 +1,40 @@
-﻿@model IEnumerable<SchoolSystem.DbModels.Model.Teacher>
+﻿@model IEnumerable<SchoolSystem.MVC.Models.Teacher>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+    <script>
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+               // debugger;
+                $.ajax(
+                    {
+                        type: "GET", //GET b/c it is getting or finding the findByLastName Method
+                        url: "findByLastName", // Controller/View or Controller is optional 
+                        data: { //Passing data to the method
+                            searchLastName: $("#txtSearchByLastName").val() //Reading text box values using Jquery
+                        }//,
+                    })// the above method will create an object once the above is returned eg. bill is the string returned it will replace the table totally.
+                    .done(function (bill) {
+                    $("#tblContainer").html(bill);
 
+                });
+            
+
+            });
+        });
+
+
+    </script>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <input class="form-control" type="text" id="txtSearchByLastName"placeholder="enter last name" aria-label="Search">
+    <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+    @Html.ActionLink("Add Teacher", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HireDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Major)
-        </th>
-        <th>Admin Panel</th>
-    </tr>
+@Html.Partial("PartialList",Model)
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HireDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Major)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeacherId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeacherId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeacherId })
-        </td>
-    </tr>
-}
 
-</table>
+
+

@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.DbModels.Model.Teacher
+﻿@model SchoolSystem.MVC.Models.Teacher
 
 @{
     ViewBag.Title = "Delete";
@@ -43,10 +43,20 @@
         <dd>
             @Html.DisplayFor(model => model.Major)
         </dd>
+        
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
@@ -55,3 +65,5 @@
         </div>
     }
 </div>
+
+

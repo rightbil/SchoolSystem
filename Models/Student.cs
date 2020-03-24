@@ -36,6 +36,10 @@ namespace SchoolSystem.DbModels.Model
             private set { value = DateTime.Now; }
             
         }
-        public virtual ICollection<Course> Courses { get; set; }
+
+        // public virtual ICollection<Course> Courses { get; set; }
+        // public int DepartmentId { get; set; }
+        // public Department Department { get; set; }
+
     }
 }

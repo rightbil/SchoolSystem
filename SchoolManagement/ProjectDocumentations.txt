@@ -80,9 +80,9 @@ What really happens in MVC Frame Work
 a.	When does application start kick ? when it gets request –  www.google.com + enter
 b.	Application_Start  - we can put any thing we need to happen first. 
 c.	It contains
-i.	 Global filters (? Mule) ,
-ii.	 RegisterRoute,
-iii.	 Route tables and 
+i.	Global filters (? Mule) ,
+ii.	RegisterRoute,
+iii.Route tables and 
 iv.	BundleTable {scripts and css can be here after MVC 4}
 3.	The register route - is referring the register route from app-config where we write Controller/ Veiw/ Id etc 
 4.	 Routing request try to match the incoming url to the collection in RegisterRoutes

@@ -7,13 +7,13 @@ namespace Repos.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class mrgn : IMigrationMetadata
+    public sealed partial class Migrs : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(mrgn));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Migrs));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003190141026_mrgn"; }
+            get { return "202003240240046_Migrs"; }
         }
         
         string IMigrationMetadata.Source

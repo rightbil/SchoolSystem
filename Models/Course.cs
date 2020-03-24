@@ -13,8 +13,11 @@ namespace SchoolSystem.DbModels.Model
         public string Title { get; set; }
         public int Credit { get; set; }
         public double Price { get; set; }
-        public virtual ICollection<CourseEnrollement> Enrollments { get; set; }
+
         public virtual ICollection<Teacher> Teachers { get; set; }
+        // public virtual ICollection<Student> Students { get; set; }
+        // public int DepartmentId { get; set; }
+        // public Department Department { get; set; }
 
     }
 }
