@@ -5,7 +5,7 @@ namespace SchoolSystem.Controllers
     {
 
 
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             return View();
         }
@@ -23,5 +23,6 @@ namespace SchoolSystem.Controllers
 
             return View();
         }
+    */
     }
 }

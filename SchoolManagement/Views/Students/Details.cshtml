@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.DbModels.Model.Student
+﻿@model SchoolSystem.MVC.Models.Student
 
 @{
     ViewBag.Title = "Details";
@@ -98,7 +98,13 @@
         <dd>
             @Html.DisplayFor(model => model.RegisteredOn)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
     </dl>
 </div>
 <p>

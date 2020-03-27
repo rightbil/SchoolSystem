@@ -1,0 +1,18 @@
+﻿@*@using SchoolSystem.MVC.Models*@
+
+@using SchoolSystem.DbModels.Model
+@model List<SchoolSystem.DbModels.Model.Department>
+
+<h4>List of Departments</h4>
+
+@foreach(Department d in Model){
+
+    <ul>
+        
+        <li>
+            
+         @Html.ActionLink(d.DepartmentName,"ListOfStudents","Students",new {departmentid=d.DepartmentId},null)         
+
+        </li>
+    </ul>
+}

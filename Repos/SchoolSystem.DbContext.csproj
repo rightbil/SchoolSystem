@@ -71,6 +71,26 @@
     <Compile Include="Migrations\202003240316130_Migrs2.designer.cs">
       <DependentUpon>202003240316130_Migrs2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003241257469_Migrn2.cs" />
+    <Compile Include="Migrations\202003241257469_Migrn2.designer.cs">
+      <DependentUpon>202003241257469_Migrn2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003241316219_Migrn3.cs" />
+    <Compile Include="Migrations\202003241316219_Migrn3.designer.cs">
+      <DependentUpon>202003241316219_Migrn3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003241726199_Migrn4.cs" />
+    <Compile Include="Migrations\202003241726199_Migrn4.designer.cs">
+      <DependentUpon>202003241726199_Migrn4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003250257064_Migrn5.cs" />
+    <Compile Include="Migrations\202003250257064_Migrn5.designer.cs">
+      <DependentUpon>202003250257064_Migrn5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003251722305_Mgrn.cs" />
+    <Compile Include="Migrations\202003251722305_Mgrn.designer.cs">
+      <DependentUpon>202003251722305_Mgrn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchoolDbContext.cs" />
@@ -100,6 +120,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003240316130_Migrs2.resx">
       <DependentUpon>202003240316130_Migrs2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003241257469_Migrn2.resx">
+      <DependentUpon>202003241257469_Migrn2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003241316219_Migrn3.resx">
+      <DependentUpon>202003241316219_Migrn3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003241726199_Migrn4.resx">
+      <DependentUpon>202003241726199_Migrn4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003250257064_Migrn5.resx">
+      <DependentUpon>202003250257064_Migrn5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003251722305_Mgrn.resx">
+      <DependentUpon>202003251722305_Mgrn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

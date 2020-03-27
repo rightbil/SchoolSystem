@@ -1,34 +1,84 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Web.Mvc;
-//using SchoolSystem.MVC.Models;
-using SchoolSystem.DbModels.Model;
+using SchoolSystem.MVC.Models;
 using SchoolSystem.DbContext;
 using SchoolSystem.Utility;
-
 namespace SchoolSystem.Controllers
 {
     public class StudentsController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
         private EmailSender sender = new EmailSender();
-
-
-        // GET: Students
-        public ActionResult Index()
+        public List<Student> SelectAllStudents()
         {
-         return View(db.students.ToList());
+            var listOfStudents = new List<Student>();
+            foreach (var student in db.students.Include(x => x.Department).ToList())
+            {
+                listOfStudents.Add(new Student()
+                {
+                    StudentId = student.StudentId,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    EmailAddress = student.EmailAddress,
+                    Password = student.Password,
+                    PhoneNumber = student.PhoneNumber,
+                    DateOfBirth = student.DateOfBirth.ToShortDateString(),
+                    Postalcode = student.Postalcode,
+                    Comment = student.Comment,
+                    ImageUrl = student.ImageUrl,
+                    RegisteredOn = student.RegisteredOn,
+                    DepartmentId = student.DepartmentId,
+                    Department = student.Department.DepartmentName
+                }
+                );
+
+            }
+            return listOfStudents;
+
         }
 
-        //// GET: Students/Details/5
+        public Student SelectAStudent(int? id)
+        {
+            var stdntFromDb = db.students.Include(x => x.Department).FirstOrDefault(x => x.StudentId == id);
+
+            return new Student()
+            {
+                StudentId = stdntFromDb.StudentId,
+                FirstName = stdntFromDb.FirstName,
+                LastName = stdntFromDb.LastName,
+                EmailAddress = stdntFromDb.EmailAddress,
+                Password = stdntFromDb.Password,
+                PhoneNumber = stdntFromDb.PhoneNumber,
+                DateOfBirth = stdntFromDb.DateOfBirth.ToShortDateString(),
+                Postalcode = stdntFromDb.Postalcode,
+                Comment = stdntFromDb.Comment,
+                ImageUrl = stdntFromDb.ImageUrl,
+                RegisteredOn = stdntFromDb.RegisteredOn,
+                DepartmentId = stdntFromDb.Department.DepartmentId,
+                Department = stdntFromDb.Department.DepartmentName
+            };
+        }
+        public ActionResult Index()
+        {
+
+            return View(SelectAllStudents());
+        }
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.students.Find(id);
+
+            Student student = SelectAStudent(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -36,66 +86,106 @@ namespace SchoolSystem.Controllers
             return View(student);
         }
 
-        // GET: Students/Create
         public ActionResult Create()
         {
-
+            ViewData["Departments"] = new SelectList(db.departments, "DepartmentId", "DepartmentName");
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
 
-
-            // POST: Students/Create
-            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-            // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-
-            public ActionResult Create(
-                
-                [Bind(Include ="ID,LastName,FirstName,EmailAddress, Password, PhoneNumber,DateOfBirth, PostalCode,Photo, Comment, ImageUrl")]
-                Student student) //, HttpPostedFileBase file)
+        /*
+        public ActionResult Create(FormCollection frmCollection)
+        {
+            foreach (var key in frmCollection.AllKeys)
             {
-                if (ModelState.IsValid)
-                { 
-                    /*
+                Response.Write( key + " " + key[]);
+            }
+            */
 
-                if (file != null)
+        public ActionResult Create([Bind(Include = "StudentId, LastName,FirstName,EmailAddress,ConfirmEmailAddress, Password, ConfirmPassword, PhoneNumber,DateOfBirth, PostalCode,Comment, ImageUrl,DepartmentId")] Student student) //, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                SchoolSystem.DbModels.Model.Student studentToSave = new SchoolSystem.DbModels.Model.Student()
                 {
-                    string pic = System.IO.Path.GetFileName(file.FileName);
-                    string path = System.IO.Path.Combine(
-                        Server.MapPath("~/images/profile"), pic);
-                    // file is uploaded
-                    file.SaveAs(path);
+                    StudentId = student.StudentId,
+                    LastName = student.LastName,
+                    FirstName = student.FirstName,
+                    EmailAddress = student.EmailAddress,
+                    Password = student.Password,
+                    PhoneNumber = student.PhoneNumber,
+                    DateOfBirth = DateTime.Parse(student.DateOfBirth),
+                    Postalcode = student.Postalcode,
+                    Comment = student.Comment,
+                    ImageUrl = student.ImageUrl,
+                    DepartmentId = student.DepartmentId
+                };
+                /*
 
-                    // save the image path path to the database or you can send image 
-                    // directly to database
-                    // in-case if you want to store byte[] ie. for DB
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        file.InputStream.CopyTo(ms);
-                        byte[] array = ms.GetBuffer();
-                    }
+            if (file != null)
+            {
+                string pic = System.IO.Path.GetFileName(file.FileName);
+                string path = System.IO.Path.Combine(
+                    Server.MapPath("~/images/profile"), pic);
+                // file is uploaded
+                file.SaveAs(path);
 
-                }*/
-
-                db.students.Add(student);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                // save the image path path to the database or you can send image 
+                // directly to database
+                // in-case if you want to store byte[] ie. for DB
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    file.InputStream.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
                 }
 
-                return View(student);
-            }
-        
+            }*/
 
-        // GET: Students/Edit/5
-        public ActionResult Edit(int? id)
+                db.students.Add(studentToSave);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(student);
+
+        }
+
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.students.Find(id);
+            var stdntFromDb = db.students.Include(x => x.Department).FirstOrDefault(x => x.StudentId == id);
+            var student = new Student
+            {
+                StudentId = stdntFromDb.StudentId,
+                FirstName = stdntFromDb.FirstName,
+                LastName = stdntFromDb.LastName,
+                EmailAddress = stdntFromDb.EmailAddress,
+                Password = stdntFromDb.Password,
+                PhoneNumber = stdntFromDb.PhoneNumber,
+                DateOfBirth = stdntFromDb.DateOfBirth.ToShortDateString(),
+                Postalcode = stdntFromDb.Postalcode,
+                Comment = stdntFromDb.Comment,
+                ImageUrl = stdntFromDb.ImageUrl,
+                DepartmentId = stdntFromDb.Department.DepartmentId,
+            };
+
+            var deptChoise = new List<SelectListItem>();
+            foreach (var dept in db.departments)
+            {
+                deptChoise.Add(new SelectListItem()
+                {
+                    Text = dept.DepartmentName,
+                    Value = dept.DepartmentId.ToString(),
+                    Selected = dept.DepartmentId == stdntFromDb.Department.DepartmentId ? true : false
+                });
+            }
+            //Console.WriteLine("testing values");
+            ViewData["Departments"] = deptChoise;
+
             if (student == null)
             {
                 return HttpNotFound();
@@ -103,30 +193,45 @@ namespace SchoolSystem.Controllers
             return View(student);
         }
 
-        // POST: Students/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentId,LastName,FirstName,EmailAddress,Password , PhoneNumber,DateOfBirth,Postalcode,Photo,Comment,ImageUrl,RegisteredOn")] Student student)
+        public ActionResult Edit([Bind(Include = "StudentId,LastName,FirstName,EmailAddress,ConfirmEmailAddress,Password ,ConfirmPassword, PhoneNumber,DateOfBirth,Postalcode,Comment,ImageUrl,RegisteredOn,Department")] Student student)
         {
+            SchoolSystem.DbModels.Model.Student studentToEdit = new SchoolSystem.DbModels.Model.Student
+            {
+                StudentId = student.StudentId,
+                FirstName = student.FirstName,
+                LastName = student.LastName,
+                EmailAddress = student.EmailAddress,
+                Password = student.Password,
+                PhoneNumber = student.PhoneNumber,
+                DateOfBirth = DateTime.Parse(student.DateOfBirth),
+                Postalcode = student.Postalcode,
+                Comment = student.Comment,
+                ImageUrl = student.ImageUrl,
+                RegisteredOn = student.RegisteredOn,
+                DepartmentId = int.Parse(student.Department)
+            };
+
+
+
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(studentToEdit).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(student);
         }
 
-        // GET: Students/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.students.Find(id);
+
+            var student = SelectAStudent(id);
             if (student == null)
             {
                 return HttpNotFound();
@@ -134,15 +239,44 @@ namespace SchoolSystem.Controllers
             return View(student);
         }
 
-        // POST: Students/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.students.Find(id);
+            SchoolSystem.DbModels.Model.Student student = db.students.Find(id);
             db.students.Remove(student);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+
+        public ActionResult ListOfStudents(int id)
+        {
+            //var studentList = db.students.SqlQuery("Select * from tblStudent").ToList();
+            /*var student = db.students
+                              .SqlQuery("SELECT [First Name],[Last Name], [Department Name] FROM tblStudent INNER JOIN tblDepartment ON[DtudentId=@id", new SqlParameter("@id", 1))
+                              .FirstOrDefault();*/
+            // db.Database.ExecuteSqlCommand()
+            //Get student name of string type
+            //string firstName = db.Database.SqlQuery<string>("Select [First Name] from tblStudent where StudentId=1").FirstOrDefault();
+            //string lastName = db.Database.SqlQuery<string>("Select [Last Name] from tblStudent where StudentId=@id", new SqlParameter("@id", 1)).FirstOrDefault();
+            return View();
+        }
+
+
+        public ActionResult StudentCountByDepartment()
+        {
+
+      var studentCount = db.students.GroupBy(x => x.Department.DepartmentName)
+                .Select( y=> new StudentByDepartment
+            {
+                Department = y.Key,
+                Total = y.Count()
+
+            }).ToList().OrderByDescending(z=>z.Total);
+
+      return View(studentCount);
         }
 
         protected override void Dispose(bool disposing)

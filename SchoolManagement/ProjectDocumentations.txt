@@ -28,12 +28,15 @@
 18. Services / Consume / Writing Services
 19. Read Core a bit
 20. HttpContext and Sessions and Cookies
+21. Extension Method
+22. Anonymouse Object
 
 --Front end basics---
 1. Java Script/ Ajax / Jquery
 2. HTML/ CSS 
 3. Bootstrap
 4. CSS
+5. Partial View
 
 
  MVC framework
@@ -88,6 +91,4 @@ iv.	BundleTable {scripts and css can be here after MVC 4}
 4.	 Routing request try to match the incoming url to the collection in RegisterRoutes
 1)	Note: Route are defined / added to the collection before anything happens.
 2)	M(what will happen if it did not fine a match – this is the server) how does it get the 404 error.
-5.	djdjjd
-
-6.	Each of the routes has associated RouteHandler class
+5. Each of the routes has associated RouteHandler class

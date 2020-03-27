@@ -169,5 +169,12 @@ namespace SchoolManagement.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult ListAllDepartments()
+        {
+            var depts = db.departments.OrderByDescending(x=>x.Capacity).ToList();
+
+            return View(depts);
+        }
     }
 }

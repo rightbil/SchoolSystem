@@ -1,4 +1,4 @@
-﻿@model SchoolSystem.DbModels.Model.Student
+﻿@model SchoolSystem.MVC.Models.Student
 
 @{
     ViewBag.Title = "Delete";
@@ -69,12 +69,12 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.Photo)
-        </dt>
+                @Html.DisplayNameFor(model => model.Photo)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Photo)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.Photo)
+            </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.Comment)
@@ -100,9 +100,18 @@
             @Html.DisplayFor(model => model.RegisteredOn)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

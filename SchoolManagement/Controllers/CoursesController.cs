@@ -1,10 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.Remoting.Messaging;
 using System.Web.Mvc;
-using SchoolSystem.DbModels.Model;
+using SchoolSystem.MVC.Models;
 using SchoolSystem.DbContext;
-
 
 
 namespace SchoolSystem.Controllers
@@ -12,72 +13,101 @@ namespace SchoolSystem.Controllers
     public class CoursesController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
+        public List<Course> SelectAllCourses()
+        {
+            var listOfStudents = new List<Course>();
+            foreach (var c in db.courses.ToList())
+            {
+                listOfStudents.Add(new Course()
+                {
+                    CourseId = c.CourseId,
+                    Title = c.Title,
+                    Credit = c.Credit,
+                    Price = c.Price
 
-        // GET: Courses
+                }
+                );
+
+            }
+            return listOfStudents;
+        }
+        public Course SelectACourse(int? id)
+        {
+            var c = db.courses.FirstOrDefault(x => x.CourseId == id);
+
+            return new Course()
+            {
+                CourseId = c.CourseId,
+                Title = c.Title,
+                Credit = c.Credit,
+                Price = c.Price
+
+
+            };
+
+        }
         public ActionResult Index()
         {
-           return View(db.courses.ToList());
+           return View(SelectAllCourses());
          }
-        
- 
-
-        // GET: Courses/Details/5
+  
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.courses.Find(id);
+
+            Course course = SelectACourse(id);
             if (course == null)
             {
                 return HttpNotFound();
             }
             return View(course);
         }
-
-        // GET: Courses/Create
+ 
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: Courses/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Price,Credit")] Course course)
         {
+
+            SchoolSystem.DbModels.Model.Course courseToEdit = new SchoolSystem.DbModels.Model.Course
+            {
+                CourseId = course.CourseId,
+                Title=course.Title,
+                Credit = course.Credit,
+                Price = course.Price
+
+            };
+
             if (ModelState.IsValid)
             {
-                db.courses.Add(course);
+                db.courses.Add(courseToEdit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(course);
+            return View(courseToEdit);
         }
-
-        // GET: Courses/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.courses.Find(id);
+
+            Course course = SelectACourse(id);
             if (course == null)
             {
                 return HttpNotFound();
             }
             return View(course);
         }
-
-        // POST: Courses/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+      [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CourseId,Title,Credit,Price")] Course course)
         {
@@ -90,33 +120,28 @@ namespace SchoolSystem.Controllers
             }
             return View(course);
         }
-
-        // GET: Courses/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.courses.Find(id);
+            Course course = SelectACourse(id);
             if (course == null)
             {
                 return HttpNotFound();
             }
             return View(course);
         }
-
-        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.courses.Find(id);
+            SchoolSystem.DbModels.Model.Course  course= db.courses.FirstOrDefault(x=>x.CourseId==id);
             db.courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

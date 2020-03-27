@@ -16,7 +16,7 @@ namespace SchoolSystem
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Teachers", action = "Create", id = UrlParameter.Optional }
+                defaults: new { controller = "Students", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

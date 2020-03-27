@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Remoting;
 
 namespace SchoolSystem.DbModels.Model
 {
@@ -33,10 +31,11 @@ namespace SchoolSystem.DbModels.Model
         public DateTime RegisteredOn
         {
             get { return DateTime.Now; }
-            private set { value = DateTime.Now; }
+            set { value = DateTime.Now; }
             
         }
-
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
         // public virtual ICollection<Course> Courses { get; set; }
         // public int DepartmentId { get; set; }
         // public Department Department { get; set; }
