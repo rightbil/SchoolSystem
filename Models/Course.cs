@@ -15,7 +15,7 @@ namespace SchoolSystem.DbModels.Model
         public double Price { get; set; }
 
         public virtual ICollection<Teacher> Teachers { get; set; }
-        // public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<Enrollment> Enrollments { get; set; }
         // public int DepartmentId { get; set; }
         // public Department Department { get; set; }
 

@@ -12,7 +12,7 @@ using SchoolSystem.DbContext;
 
 namespace SchoolSystem.Controllers
 {
-    public class CourseEnrollmentsController : Controller
+    public class EnrollmentsController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
 
@@ -30,7 +30,7 @@ namespace SchoolSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CourseEnrollement enrollment = db.enrollments.Find(id);
+            Enrollment enrollment = db.enrollments.Find(id);
             if (enrollment == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EnrollmentID,CourseID,StudentID,Grade")] CourseEnrollement enrollment)
+        public ActionResult Create([Bind(Include = "EnrollmentID,CourseID,StudentID,Grade")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace SchoolSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CourseEnrollement enrollment = db.enrollments.Find(id);
+            Enrollment enrollment = db.enrollments.Find(id);
             if (enrollment == null)
             {
                 return HttpNotFound();
@@ -87,7 +87,7 @@ namespace SchoolSystem.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EnrollmentID,CourseID,StudentID,Grade")] CourseEnrollement enrollment)
+        public ActionResult Edit([Bind(Include = "EnrollmentID,CourseID,StudentID,Grade")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace SchoolSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CourseEnrollement enrollment = db.enrollments.Find(id);
+            Enrollment enrollment = db.enrollments.Find(id);
             if (enrollment == null)
             {
                 return HttpNotFound();
@@ -120,7 +120,7 @@ namespace SchoolSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CourseEnrollement enrollment = db.enrollments.Find(id);
+            Enrollment enrollment = db.enrollments.Find(id);
             db.enrollments.Remove(enrollment);
             db.SaveChanges();
             return RedirectToAction("Index");

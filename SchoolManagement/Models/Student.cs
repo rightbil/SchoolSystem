@@ -70,6 +70,8 @@ namespace SchoolSystem.MVC.Models
         // foreing key
         public int DepartmentId { get; set; }
         public String  Department { get; set; }
+
+        // 
     }
 
     public enum Gender

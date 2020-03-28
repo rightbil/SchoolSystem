@@ -23,10 +23,16 @@ namespace SchoolSystem.DbContext
         */
 
 
-        protected override void OnModelCreating(DbModelBuilder modelbuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelbuilder);
-           // modelbuilder.Entity<Student>().HasMany(p => p.Department).WithMany()
+            base.OnModelCreating(modelBuilder);
+            // modelbuilder.Entity<Student>().HasMany(p => p.Department).WithMany()
+
+            /*modelBuilder.Entity<Course>()
+                .HasMany(c => ).WithMany(i => i.Courses)
+                .Map(t => t.MapLeftKey("CourseID")
+                    .MapRightKey("StudentId")
+                    .ToTable("Enrollment"));*/
         }
         /*modelbuilder.Entity(typeof(ChangeOrder))
                 .HasOne(typeof(User), "AssignedTo")
@@ -57,7 +63,7 @@ namespace SchoolSystem.DbContext
 
         public  SchoolDbContext():base("SchoolSystemConn") {}
         public DbSet<Student> students { get; set; }
-        public DbSet<CourseEnrollement> enrollments { get; set; }
+        public DbSet<Enrollment> enrollments { get; set; }
         public DbSet<Course> courses { get; set; }
         public DbSet<Teacher> teachers { get; set; }
         public DbSet<Department> departments { get; set; }

@@ -6,10 +6,10 @@ using System.Web;
 
 namespace SchoolSystem.MVC.Models
 {
-    public class CourseEnrollement
+    public class Enrollement
     {
         [Key]
-        public int CourseEnrollemntId { get; set; }
+        public int EnrollemntId { get; set; }
         public int  StudentId { get; set; }
         public int  CourseId { get; set; }
     }
