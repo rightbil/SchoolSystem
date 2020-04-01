@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SchoolSystem.MVC.Models.Instructor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <script>
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+               // debugger;
+                $.ajax(
+                    {
+                        type: "GET", //GET b/c it is getting or finding the findByLastName Method
+                        url: "findByLastName", // Controller/View or Controller is optional 
+                        data: { //Passing data to the method
+                            searchLastName: $("#txtSearchByLastName").val() //Reading text box values using Jquery
+                        }//,
+                    })// the above method will create an object once the above is returned eg. bill is the string returned it will replace the table totally.
+                    .done(function (bill) {
+                    $("#tblContainer").html(bill);
+
+                });
+            
+
+            });
+        });
+
+
+    </script>
+<p>
+    <input class="form-control" type="text" id="txtSearchByLastName"placeholder="enter last name" aria-label="Search">
+    <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+    @Html.ActionLink("Add Instructor", "Create")
+</p>
+@Html.Partial("PartialList",Model)
+
+
+
+

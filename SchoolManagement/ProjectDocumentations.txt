@@ -92,3 +92,7 @@ iv.	BundleTable {scripts and css can be here after MVC 4}
 1)	Note: Route are defined / added to the collection before anything happens.
 2)	M(what will happen if it did not fine a match – this is the server) how does it get the 404 error.
 5. Each of the routes has associated RouteHandler class
+
+6.Adding localazation in the System.web node in the web.config add <globalization culture="en-GB" uiCulture="en-GB"/> ( mule)
+How can different contries can see price based on their curruncy ( mule)
+Install-Pacakage EntitiyFramework -projectname SportsStore.Domain

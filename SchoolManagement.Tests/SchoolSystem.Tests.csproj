@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TeachersControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
@@ -99,9 +100,25 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Exceptions\SchoolSystem.Exceptions.csproj">
+      <Project>{2c4101ca-3c3a-43d0-a0d3-a782fc4da033}</Project>
+      <Name>SchoolSystem.Exceptions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\SchoolSystem.DbModels.csproj">
+      <Project>{60239383-88be-4e06-9f7a-d137502ff008}</Project>
+      <Name>SchoolSystem.DbModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repos\SchoolSystem.DbContext.csproj">
+      <Project>{114baf0f-def8-4ad2-b60e-73059741695e}</Project>
+      <Name>SchoolSystem.DbContext</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SchoolManagement\SchoolSystem.MVC.csproj">
       <Project>{D55A6F65-80CF-4D4B-8B55-47D5B37F2BD1}</Project>
       <Name>SchoolSystem.MVC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\SchoolSystem.Utility.csproj">
+      <Project>{b7d1978b-8c7f-46f1-a382-24531a14bf36}</Project>
+      <Name>SchoolSystem.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

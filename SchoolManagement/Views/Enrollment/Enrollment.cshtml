@@ -1,0 +1,15 @@
+﻿@using System.Collections
+
+@{
+    ViewBag.Title = "Enrollment";
+}
+<h2>Course Enrollment for Students</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.DropDownList("students", "Select Student");
+
+
+
+}

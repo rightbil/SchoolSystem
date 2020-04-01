@@ -1,0 +1,23 @@
+﻿@model SchoolSystem.MVC.ViewModels.VMRadioButtonDepartmet
+
+@{
+    ViewBag.Tile = "Radio Button";
+}
+
+<h4>Departments</h4>
+
+@using (Html.BeginForm())
+{
+
+    foreach (var dept in Model.Departments)
+    {
+        @Html.RadioButtonFor(d=>d.SelectedDepartment,dept.DepartmentId,
+
+              string.Equals(dept.DepartmentName, "Accounting") ?
+                           new  { @checked= "checked" } : null) @dept.DepartmentName
+        
+    }
+    <br/>
+    <br/>
+    <input type="submit" value="Submit"/>
+}

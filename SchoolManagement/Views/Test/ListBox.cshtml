@@ -1,0 +1,13 @@
+﻿@model SchoolSystem.MVC.ViewModels.VMListBoxDepartment
+
+@{
+    ViewBag.Title = "ListBox";
+}
+
+@using (@Html.BeginForm())
+{
+    @Html.ListBoxFor(x=>x.selectedDepartments,Model.Departments,new{size=3})
+
+    <br/>
+    <input type="submit" value="Submit"/>
+}
