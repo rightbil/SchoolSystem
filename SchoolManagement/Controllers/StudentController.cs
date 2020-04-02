@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
 using System.Web.Mvc;
 using SchoolSystem.MVC.Models;
@@ -17,6 +12,10 @@ namespace SchoolSystem.Controllers
     {
         private SchoolDbContext db = new SchoolDbContext();
         private EmailSender sender = new EmailSender();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<Student> SelectAllStudents()
         {
             var listOfStudents = new List<Student>();
@@ -43,7 +42,11 @@ namespace SchoolSystem.Controllers
             return listOfStudents;
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Student SelectAStudent(int? id)
         {
             var stdntFromDb = db.students.Include(x => x.Department).FirstOrDefault(x => x.StudentId == id);
@@ -83,27 +86,15 @@ namespace SchoolSystem.Controllers
             }
             return View(student);
         }
-
         public ActionResult Create()
         {
             ViewData["Departments"] = new SelectList(db.departments, "DepartmentId", "DepartmentName");
             return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-
-        /*
-        public ActionResult Create(FormCollection frmCollection)
-        {
-            foreach (var key in frmCollection.AllKeys)
-            {
-                Response.Write( key + " " + key[]);
-            }
-            */
-
+        [HttpPost,ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "StudentId, LastName,FirstName,EmailAddress,ConfirmEmailAddress, Password, ConfirmPassword, PhoneNumber,DateOfBirth, PostalCode,Comment, Url,DepartmentId")] Student student) //, HttpPostedFileBase file)
         {
+            Response.Write("Testing: " + student.StudentId);
             if (ModelState.IsValid)
             {
                 SchoolSystem.DbModels.Model.Student studentToSave = new SchoolSystem.DbModels.Model.Student()
@@ -148,7 +139,6 @@ namespace SchoolSystem.Controllers
             return View(student);
 
         }
-
         public ActionResult Edit(int id)
         {
             if (id == null)
@@ -190,9 +180,7 @@ namespace SchoolSystem.Controllers
             }
             return View(student);
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost,ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "StudentId,LastName,FirstName,EmailAddress,ConfirmEmailAddress,Password ,ConfirmPassword, PhoneNumber,DateOfBirth,Postalcode,Comment,ImageUrl,RegisteredOn,Department")] Student student)
         {
             SchoolSystem.DbModels.Model.Student studentToEdit = new SchoolSystem.DbModels.Model.Student
@@ -220,7 +208,6 @@ namespace SchoolSystem.Controllers
             }
             return View(student);
         }
-
         public ActionResult Delete(int id)
         {
             if (id == null)
@@ -235,10 +222,7 @@ namespace SchoolSystem.Controllers
             }
             return View(student);
         }
-
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete"),ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             SchoolSystem.DbModels.Model.Student student = db.students.Find(id);
@@ -246,8 +230,6 @@ namespace SchoolSystem.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
         public ActionResult ListOfStudents(int id)
         {
             //var studentList = db.students.SqlQuery("Select * from tblStudent").ToList();
@@ -260,12 +242,9 @@ namespace SchoolSystem.Controllers
             //string lastName = db.Database.SqlQuery<string>("Select [Last Name] from tblStudent where StudentId=@id", new SqlParameter("@id", 1)).FirstOrDefault();
             return View();
         }
-
-
         public ActionResult StudentCountByDepartment()
         {
-
-      var studentCount = db.students.GroupBy(x => x.Department.DepartmentName)
+         var studentCount = db.students.GroupBy(x => x.Department.DepartmentName)
                 .Select( y=> new StudentByDepartment
             {
                 Department = y.Key,
@@ -275,7 +254,6 @@ namespace SchoolSystem.Controllers
 
       return View(studentCount);
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

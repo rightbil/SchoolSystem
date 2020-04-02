@@ -5,12 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using SchoolSystem.MVC.Models;
 using System.Text;
 using System.IO;
 using System.Web;
 using System.Web.UI;
-using Microsoft.Ajax.Utilities;
+
 
 namespace SchoolSystem.MVC.Models.Controllers
 {

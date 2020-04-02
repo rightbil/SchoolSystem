@@ -7,9 +7,14 @@
 
 @using (Html.BeginForm())
 {
+    @Html.Display("Student List")
+    @Html.DropDownList("Student", (IEnumerable<SelectListItem>)ViewBag.students, "Select Student")
+    @Html.Display("Available Course")
+    @Html.DropDownList("courses", "Select Course");
 
-    @Html.DropDownList("students", "Select Student");
+    <form>
 
+    </form>
 
 
 }

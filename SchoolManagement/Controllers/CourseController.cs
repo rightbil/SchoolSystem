@@ -2,12 +2,11 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Runtime.Remoting.Messaging;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using SchoolSystem.MVC.Models;
 using SchoolSystem.DbContext;
-
-
+using SchoolSystem.Exceptions;
 namespace SchoolSystem.Controllers
 {
     public class CourseController : Controller
@@ -32,32 +31,24 @@ namespace SchoolSystem.Controllers
             return listOfStudents;
         }
         public Course SelectACourse(int? id)
-        {
-            var c = db.courses.FirstOrDefault(x => x.CourseId == id);
-
+        { var c = db.courses.FirstOrDefault(x => x.CourseId == id);
             return new Course()
             {
                 CourseId = c.CourseId,
                 Title = c.Title,
                 Credit = c.Credit,
                 Price = c.Price
-
-
             };
-
         }
         public ActionResult Index()
-        {
-           return View(SelectAllCourses());
+        { return View(SelectAllCourses());
          }
-  
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             Course course = SelectACourse(id);
             if (course == null)
             {
@@ -65,15 +56,23 @@ namespace SchoolSystem.Controllers
             }
             return View(course);
         }
- 
         public ActionResult Create()
         {
             return View();
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost,ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Price,Credit")] Course course)
         {
+            
+            try
+            {
+                ValidateCourseTitle(course.Title);
+            }
+            catch (InvalidNameException ex)
+            {
+                Response.Write(ex.Message);
+                throw;
+            }
 
             SchoolSystem.DbModels.Model.Course courseToEdit = new SchoolSystem.DbModels.Model.Course
             {
@@ -81,7 +80,6 @@ namespace SchoolSystem.Controllers
                 Title=course.Title,
                 Credit = course.Credit,
                 Price = course.Price
-
             };
 
             if (ModelState.IsValid)
@@ -90,7 +88,6 @@ namespace SchoolSystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(courseToEdit);
         }
         public ActionResult Edit(int? id)
@@ -99,7 +96,6 @@ namespace SchoolSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             Course course = SelectACourse(id);
             if (course == null)
             {
@@ -107,8 +103,7 @@ namespace SchoolSystem.Controllers
             }
             return View(course);
         }
-      [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost,ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CourseId,Title,Credit,Price")] Course course)
         {
             if (ModelState.IsValid)
@@ -133,8 +128,7 @@ namespace SchoolSystem.Controllers
             }
             return View(course);
         }
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete"),ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             SchoolSystem.DbModels.Model.Course  course= db.courses.FirstOrDefault(x=>x.CourseId==id);
@@ -149,6 +143,12 @@ namespace SchoolSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public static void  ValidateCourseTitle(string name)
+        {
+            Regex regex= new Regex("^[a-zA-Z]+ $");
+            if (regex.IsMatch(name))
+                throw new InvalidNameException(name);
         }
     }
 }
