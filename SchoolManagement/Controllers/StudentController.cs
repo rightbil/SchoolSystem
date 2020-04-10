@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using PagedList;
 using SchoolSystem.MVC.Models;
 using SchoolSystem.DbContext;
 using SchoolSystem.Utility;
@@ -33,12 +34,13 @@ namespace SchoolSystem.Controllers
                     Postalcode = student.Postalcode,
                     Comment = student.Comment,
                     Url = student.Url,
-                    //RegisteredOn = student.RegisteredOn,
                     DepartmentId = student.DepartmentId,
                     Department = student.Department.DepartmentName
                 }
                 );
             }
+            // Has used the Compare implemented 
+            listOfStudents.Sort();
             return listOfStudents;
 
         }
@@ -68,9 +70,11 @@ namespace SchoolSystem.Controllers
                 Department = stdntFromDb.Department.DepartmentName
             };
         }
-        public ActionResult Index()
+        public ActionResult Index(int ? page)
         {
-            return View(SelectAllStudents().OrderBy(x => x.LastName).ThenBy(x=>x.LastName));
+          // return View(SelectAllStudents().OrderBy(x => x.LastName).ThenBy(x=>x.LastName));
+            return View(SelectAllStudents().ToPagedList(page?? 1,8));
+
         }
         public ActionResult Details(int? id)
         {

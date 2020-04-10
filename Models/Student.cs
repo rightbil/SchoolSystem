@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace SchoolSystem.DbModels.Model
 {
     [Table("tblStudent")]
     public partial class Student
     {
         [Column(Order = 0), Key]
-       
         public int StudentId { get; set; }
         [Column("Last Name", Order = 2), StringLength(20), Required]
         public string LastName { get; set; }
@@ -21,12 +19,10 @@ namespace SchoolSystem.DbModels.Model
         public string Password { get; set; }
         [Column("Phone Number", Order = 6), StringLength(10), Required]
         public string PhoneNumber { get; set; }
-        [Column("DoB", TypeName = "DateTime2"), Required]
+        [Column("Date of Birth", TypeName = "Date"), Required]
         public DateTime DateOfBirth { get; set; }
         [Column("Postal Code"), StringLength(5), Required]
         public string Postalcode { get; set; }
-
-
 
         [DataType(DataType.Date)]
        // [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

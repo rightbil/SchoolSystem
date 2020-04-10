@@ -1,0 +1,28 @@
+﻿@model SchoolSystem.MVC.Models.Course
+@{
+    ViewBag.Title = "Multiple Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h6>Multiple Delete</h6>
+
+    <tr>
+        <td>
+           <input type="checkbox" name ="courseIdToDelete" id="courseIdToDelete", value="@Model.Title"/>
+        </td>
+        <td>
+            @Model.Title 
+        </td>
+        <td>
+            @Model.Credit
+        </td>
+        <td>
+            @Model.Price
+        </td>
+    </tr>
+
+   
+
+
+
+

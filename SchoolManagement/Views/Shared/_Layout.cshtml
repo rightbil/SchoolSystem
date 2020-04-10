@@ -4,59 +4,87 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <title>@ViewBag.Title - School System</title>
+    <title>- School System-@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">School System</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<body style="padding-top:0">
+    <table>
+        <tr style="background-color: red">
+            <td colspan="2" >
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="#">School System</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-           @*
-           <li class="nav-item">@Html.ActionLink("Home", "Index", "Home") </li>
+                                    @Html.ActionLink("Students", "Index", "Student")
+                                    <div class="dropdown-divider"> </div>
+                                    @Html.ActionLink("Courses", "Index", "Course")
+                                    <div class="dropdown-divider"> </div>
+                                    @Html.ActionLink("Instructor", "Index", "Instructor")
+                                    <div class="dropdown-divider"> </div>
+                                    @Html.ActionLink("Departments", "Index", "Department")
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Student   |", "Index", "Student")
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Course    |", "Index", "Course")
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Instructor    |", "Index", "Instructor")
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Department    |", "Index", "Department")
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Enrollment    |", "Enrollment", "Enrollment")
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Disabled</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @if(IsSectionDefined("Menu"))
+                {
+                    @RenderSection("Menu",false)
+                }
+                else
+                {
+                    @Html.ActionLink("List","Index")
+                }
+            </td>
+            <td>
+                <div class="container body-content">
+                    @RenderBody()
 
-            <li class="nav-item">@Html.ActionLink("  About","About","Home")</li>
-
-            <li class="nav-item">@Html.ActionLink("  Contact", "Contact", "Home")</li>
-            *@
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Admin
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                    @Html.ActionLink("Students", "Index", "Student")
-                    <div class="dropdown-divider"> </div>
-                    @Html.ActionLink("Courses", "Index", "Course")
-                    <div class="dropdown-divider"> </div>
-                    @Html.ActionLink("Teachers", "Index", "Instructor")
-                    <div class="dropdown-divider"> </div>
-                    @Html.ActionLink("Departments", "Index", "Department")
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-   </div>
-</nav>
-<div class="container body-content">
-    @RenderBody()
-    <hr/>
-    <footer>
-        <p>&copy; @DateTime.Now.Year - School System</p>
-    </footer>
-</div>
+            </td>
+        </tr>
+        <hr />
+        <tr>
+            <td colspan="2">
+                <footer style="padding-bottom: 0;background-color: blue">
+                    <p>&copy; @DateTime.Now.Year - School System</p>
+                </footer>
+            </td>
+        </tr>
+    </table>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
 </body>
 </html>

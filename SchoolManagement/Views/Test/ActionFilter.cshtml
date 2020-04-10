@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "ActionFilter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Friends Name</h2>
+
+@Html.Action("ChildActionOnly", new {argName= new List<string>(){"Mihret","Mule","Yonas"}});
+

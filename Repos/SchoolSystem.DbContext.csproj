@@ -99,6 +99,22 @@
     <Compile Include="Migrations\202004010141294_Migrn7.designer.cs">
       <DependentUpon>202004010141294_Migrn7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004050158547_Migrn8.cs" />
+    <Compile Include="Migrations\202004050158547_Migrn8.designer.cs">
+      <DependentUpon>202004050158547_Migrn8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004050206593_Migrn9.cs" />
+    <Compile Include="Migrations\202004050206593_Migrn9.designer.cs">
+      <DependentUpon>202004050206593_Migrn9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004062154285_Migrn10.cs" />
+    <Compile Include="Migrations\202004062154285_Migrn10.designer.cs">
+      <DependentUpon>202004062154285_Migrn10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004070037520_Migrn11.cs" />
+    <Compile Include="Migrations\202004070037520_Migrn11.designer.cs">
+      <DependentUpon>202004070037520_Migrn11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchoolDbContext.cs" />
@@ -149,6 +165,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004010141294_Migrn7.resx">
       <DependentUpon>202004010141294_Migrn7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004050158547_Migrn8.resx">
+      <DependentUpon>202004050158547_Migrn8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004050206593_Migrn9.resx">
+      <DependentUpon>202004050206593_Migrn9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004062154285_Migrn10.resx">
+      <DependentUpon>202004062154285_Migrn10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004070037520_Migrn11.resx">
+      <DependentUpon>202004070037520_Migrn11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

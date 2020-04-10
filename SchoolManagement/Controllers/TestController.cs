@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SchoolSystem.DbModels.Model;
 using SchoolSystem.MVC.ViewModels;
-namespace SchoolManagement.Controllers
+namespace SchoolSystem.Controllers
 {
     public class TestController : Controller
     {
@@ -64,10 +64,27 @@ namespace SchoolManagement.Controllers
 
         public ActionResult DisplayUrl()
         {
+            //Mule
          return View(db.students.ToList());
         }
 
+        public ActionResult Layout()
+        {
+            
+            return View();
+        }
 
+        //ChildActionOnly
 
+        public ActionResult ActionFilter()
+        {
+            return View();
+        }
+
+        public ActionResult ChildActionOnly(List<string> argName)
+        {
+
+            return View(argName);
+        }
     }
 }

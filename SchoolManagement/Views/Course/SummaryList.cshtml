@@ -1,0 +1,38 @@
+﻿
+@*
+@{
+    ViewBag.Title = "SummaryList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2>Course Summary</h2>
+
+@Ajax.ActionLink("All", "All", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "divCourse",
+    InsertionMode = InsertionMode.Replace
+})
+<span style="color:blue">|</span>
+
+@Ajax.ActionLink("Top 3", "TopThreeCourses", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "divCourse",
+    InsertionMode = InsertionMode.Replace
+})
+<span style="color:blue">|</span>
+
+@Ajax.ActionLink("Bottom 3", "BottomThreeCourses", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "divCourse",
+    InsertionMode = InsertionMode.Replace
+})
+
+
+<div id="divCourse">
+
+
+</div>

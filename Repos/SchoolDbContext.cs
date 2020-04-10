@@ -50,7 +50,7 @@ namespace SchoolSystem.DbContext
         public DbSet<Student> students { get; set; }
         public DbSet<Enrollment> enrollments { get; set; }
         public DbSet<Course> courses { get; set; }
-        public DbSet<Instructor> teachers { get; set; }
+        public DbSet<Instructor> instructors { get; set; }
         public DbSet<Department> departments { get; set; }
     }
 }

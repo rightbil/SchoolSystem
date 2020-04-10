@@ -1,46 +1,106 @@
-﻿@model IEnumerable<SchoolSystem.MVC.Models.Enrollment>
+﻿@*@model IEnumerable<SchoolSystem.ViewModels.VMStudentEnrolledCourses>*@
+@using PagedList.Mvc
+@using PagedList
+@model IPagedList<SchoolSystem.ViewModels.VMStudentEnrolledCourses>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Enrollment")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Course.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Grade)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Grade)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EnrollmentID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EnrollmentID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EnrollmentID })
-        </td>
-    </tr>
+@using (Html.BeginForm("Index", "Enrollment", FormMethod.Get))
+{
+    <b>Search By </b>
+    @Html.RadioButton("searchBy", "student", true)
+    <text>Student Name</text>
+    @Html.RadioButton("searchBy", "course")
+    <text> Course Title</text>
+    @Html.RadioButton("searchBy", "dateofbirth")
+    <text>Date of Birth</text>
+    <br />
+    @Html.TextBox("Search", "Search")
+    <input type="submit" value="Search" />
 }
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.studentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Courses)
+            </th>
+            <th></th>
+        </tr>
+    </table>*@
 
-</table>
+@*
+    @foreach (var item in Model)
+    {
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.studentId)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+            </tr>
+            <table>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Courses)
+                    </td>
+                    $1$<td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>#1#
+                </tr>
+            </table>
+        </table>
+    }*@
+@if (Model.Count() == 0)
+{
+    <td colspan="4">
+        No rows match search criteria.
+    </td>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <table style="font-family: Arial; border: 1px solid black; width: 300px">
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.StudentId)
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Course:</td>
+                            <td>@Html.DisplayFor(model => item.Courses)</td>
+                        </tr>
+
+                    </table>
+                </td>
+        </table>
+    }
+}
+@Html.PagedListPager(Model,page=>Url.Action("Index",
+    new
+    {
+        page,
+        searchBy=Request.QueryString["searchBy"],
+        search=Request.QueryString["search"]
+    })) 

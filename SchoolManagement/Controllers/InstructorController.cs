@@ -10,25 +10,24 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 
-
 namespace SchoolSystem.MVC.Models.Controllers
 {
     public class InstructorController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
         public int PageSize = 4;
-        public List<Instructor> SelectAllTeachers()
+        public List<Instructor> SelectAllInstructors()
         {
-            var teachers = db.teachers.Include(x => x.Department).Include(x => x.Course).ToList();
+            var teachers = db.instructors.Include(x => x.Department).Include(x => x.Course).ToList();
             List<Instructor> listOfTeachers = new List<Instructor>();
             foreach (var teacher in teachers)
             {
                 listOfTeachers.Add(new Instructor()
                 {
-                    TeacherId = teacher.InstructorId,
+                    InstructorId = teacher.InstructorId,
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
-                    Major = teacher.Major,
+                    Gender = (Gender)teacher.Gender,
                     HireDate = teacher.HireDate,
                     Department = teacher.Department.DepartmentName,
                     DepartmentId = teacher.Department.DepartmentId,
@@ -39,30 +38,31 @@ namespace SchoolSystem.MVC.Models.Controllers
 
             return listOfTeachers;
         }
-        public Instructor SelectATeacher(int id)
+        public Instructor SelectAnInstructor(int id)
         {
-            var searchedObject = db.teachers.Include(x => x.Department).Include(x => x.Course).FirstOrDefault(x => x.InstructorId == id);
+            var searchedObject = db.instructors.Include(x => x.Department).Include(x => x.Course).FirstOrDefault(x => x.InstructorId == id);
             return new Instructor()
             {
-
-                TeacherId = searchedObject.InstructorId,
+                InstructorId = searchedObject.InstructorId,
                 FirstName = searchedObject.FirstName,
                 LastName = searchedObject.LastName,
-                Major = searchedObject.Major,
+                Gender = (Gender)searchedObject.Gender,
                 HireDate = searchedObject.HireDate,
                 Department = searchedObject.Department.DepartmentName,
                 DepartmentId = searchedObject.DepartmentId,
                 Course = searchedObject.Course.Title,
                 CourseId = searchedObject.CourseId
-
-
             };
         }
+
+        [Authorize]
         public ActionResult Index(int page= 1)
         {
-            return View(SelectAllTeachers()
-                                .OrderBy(p=>p.TeacherId)
-                                .Skip((page-1) * PageSize).Take(PageSize));
+           
+            return View(SelectAllInstructors()
+                             .OrderBy(p=>p.InstructorId)
+                             .Skip((page-1) * PageSize)
+                             .Take(PageSize));
         }
         public ActionResult Details(int id)
         {
@@ -70,7 +70,7 @@ namespace SchoolSystem.MVC.Models.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Instructor instructor = SelectATeacher(id);
+            Instructor instructor = SelectAnInstructor(id);
             if (instructor == null)
             {
                 return HttpNotFound();
@@ -86,21 +86,21 @@ namespace SchoolSystem.MVC.Models.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeacherId,LastName,FirstName,Major,Department, Course")] Instructor postInstructor)
+        public ActionResult Create([Bind(Include = "InstructorId,LastName,FirstName,Gender,Department, Course")] Instructor postInstructor)
         {
             if (ModelState.IsValid)
             {
-                SchoolSystem.DbModels.Model.Instructor t = new SchoolSystem.DbModels.Model.Instructor
+                DbModels.Model.Instructor t = new DbModels.Model.Instructor
                 {
                     FirstName = postInstructor.FirstName,
                     LastName = postInstructor.LastName,
                     HireDate = DateTime.Now,
-                    Major = postInstructor.Major,
+                    //Gender = postInstructor.Gender,
                     DepartmentId = int.Parse(postInstructor.Department),
-                    InstructorId = postInstructor.TeacherId,
+                    InstructorId = postInstructor.InstructorId,
                     CourseId = int.Parse(postInstructor.Course)
                 };
-                db.teachers.Add(t);
+                db.instructors.Add(t);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -113,14 +113,14 @@ namespace SchoolSystem.MVC.Models.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var teacherToEdit = db.teachers.Include(x => x.Department).Include(x => x.Course).FirstOrDefault(x => x.InstructorId == id);
+            var teacherToEdit = db.instructors.Include(x => x.Department).Include(x => x.Course).FirstOrDefault(x => x.InstructorId == id);
 
             var teacher = new Instructor
             {
-                TeacherId = teacherToEdit.InstructorId,
+                InstructorId = teacherToEdit.InstructorId,
                 FirstName = teacherToEdit.FirstName,
                 LastName = teacherToEdit.LastName,
-                Major = teacherToEdit.Major,
+                //Major = teacherToEdit.Major,
                 HireDate = teacherToEdit.HireDate,
                 DepartmentId = teacherToEdit.Department.DepartmentId,
                 CourseId = teacherToEdit.Course.CourseId
@@ -163,14 +163,14 @@ namespace SchoolSystem.MVC.Models.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "TeacherId,LastName,FirstName,HireDate,Major,Department,Course")] Instructor instructor)
+        public ActionResult Edit([Bind(Include = "InstructorId,LastName,FirstName,HireDate,Major,Department,Course")] Instructor instructor)
         {
             SchoolSystem.DbModels.Model.Instructor instructorToEdit = new SchoolSystem.DbModels.Model.Instructor
             {
-                InstructorId = instructor.TeacherId,
+                InstructorId = instructor.InstructorId,
                 FirstName = instructor.FirstName,
                 LastName = instructor.LastName,
-                Major = instructor.Major,
+                // Major = instructor.Major,
                 HireDate = instructor.HireDate,
                 DepartmentId = int.Parse(instructor.Department),
                 CourseId = int.Parse(instructor.Course)
@@ -192,12 +192,12 @@ namespace SchoolSystem.MVC.Models.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var teacher = db.teachers.Include(x => x.Department).Include(x => x.Course).FirstOrDefault(x => x.InstructorId == id);
+            var teacher = db.instructors.Include(x => x.Department).Include(x => x.Course).FirstOrDefault(x => x.InstructorId == id);
             var teacherToDelete = new Instructor
             {
                 FirstName = teacher.FirstName,
                 LastName = teacher.LastName,
-                Major = teacher.Major,
+                //Major = teacher.Major,
                 HireDate = teacher.HireDate,
                 DepartmentId = teacher.Department.DepartmentId,
                 CourseId = teacher.Course.CourseId,
@@ -217,9 +217,9 @@ namespace SchoolSystem.MVC.Models.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var teacherConfirmDelete = db.teachers.Include(y => y.Department).FirstOrDefault(x => x.InstructorId == id);
+            var teacherConfirmDelete = db.instructors.Include(y => y.Department).FirstOrDefault(x => x.InstructorId == id);
 
-            db.teachers.Remove(teacherConfirmDelete);
+            db.instructors.Remove(teacherConfirmDelete);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -238,16 +238,16 @@ namespace SchoolSystem.MVC.Models.Controllers
         public string findByLastName(string searchLastName)
         {
 
-            var teachers = db.teachers.Include(x => x.Department).Include(x => x.Course).Where(x => x.FirstName.ToUpper().Contains(searchLastName.ToUpper())).ToList();
+            var teachers = db.instructors.Include(x => x.Department).Include(x => x.Course).Where(x => x.FirstName.ToUpper().Contains(searchLastName.ToUpper())).ToList();
             List<Instructor> listOfTeachers = new List<Instructor>();
             foreach (var teacher in teachers)
             {
                 listOfTeachers.Add(new Instructor()
                 {
-                    TeacherId = teacher.InstructorId,
+                    InstructorId = teacher.InstructorId,
                     FirstName = teacher.FirstName,
                     LastName = teacher.LastName,
-                    Major = teacher.Major,
+                    //Major = teacher.Major,
                     HireDate = teacher.HireDate,
                     Department = teacher.Department.DepartmentName,
                     DepartmentId = teacher.Department.DepartmentId,
