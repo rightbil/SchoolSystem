@@ -7,8 +7,25 @@
     <title>- School System-@ViewBag.Title </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+
+        .body {
+            min-height: 100vh;
+            position: relative;
+            margin: 0;
+            padding-bottom: 100px;
+            padding-top: 0;
+        }
+
+        .footer {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            background-color: gray;
+        }
+</style>
 </head>
-<body style="padding-top:0">
+<body class="body">
     <table>
         <tr style="background-color: red">
             <td colspan="2" >
@@ -76,7 +93,7 @@
         <hr />
         <tr>
             <td colspan="2">
-                <footer style="padding-bottom: 0;background-color: blue">
+                <footer class="footer"@*style="padding-bottom: 0;"*@>
                     <p>&copy; @DateTime.Now.Year - School System</p>
                 </footer>
             </td>

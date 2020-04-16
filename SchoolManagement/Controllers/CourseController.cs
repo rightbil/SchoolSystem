@@ -26,18 +26,18 @@ namespace SchoolSystem.Controllers
         public PartialViewResult All()
         {
             var allCourses = SelectAllCourses();
-            return PartialView("_Course", allCourses);
+            return PartialView("PartialViewCourse", allCourses);
         }
         public PartialViewResult TopThreeCourses()
         {
             var topCourses = SelectAllCourses().OrderByDescending(x=>x.Price).Take(3).ToList();
-            return PartialView("_Course", topCourses);
+            return PartialView("PartialViewCourse", topCourses);
         }
         public PartialViewResult BottomThreeCourses()
         {
             var bottomCourses = SelectAllCourses().OrderBy(x => x.Price).Take(3).ToList();
 
-            return PartialView("_Course", bottomCourses);
+            return PartialView("PartialViewCourse", bottomCourses);
         }
         //[OutputCache(Duration = 20)] [ChildActionOnly] // this works as expected
         //[OutputCache(CacheProfile = "1MinuteCache")] [ChildActionOnly] // assume "1MinuteCache" is added in web config this don't work so it needs customization

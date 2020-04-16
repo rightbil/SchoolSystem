@@ -151,6 +151,7 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\JQueryController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -169,7 +170,7 @@
     <Compile Include="ViewModels\VMListBoxDepartment.cs" />
     <Compile Include="ViewModels\VMRadioButtonDepartmet.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\StudentByDepartment.cs" />
+    <Compile Include="ViewModels\StudentByDepartment.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\VMStudentEnrolledCourses.cs" />
@@ -373,7 +374,10 @@
     <Content Include="Views\Test\ChildActionOnly.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Course\SummaryList.cshtml" />
-    <Content Include="Views\Shared\_Course.cshtml" />
+    <Content Include="Views\Shared\PartialViewCourse.cshtml" />
+    <Content Include="Views\JQuery\Index.cshtml" />
+    <Content Include="Views\Student\Enroll.cshtml" />
+    <Content Include="Views\Student\Enrollment.cshtml" />
     <None Include="Views\Test\RadioButton.cshtml" />
     <Content Include="Views\Test\ListBox.cshtml" />
   </ItemGroup>

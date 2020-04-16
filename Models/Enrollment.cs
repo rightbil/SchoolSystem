@@ -13,6 +13,7 @@ namespace SchoolSystem.DbModels.Model
         public int EnrollmentId { get; set; }
         public int CourseID { get; set; }
         public int StudentID { get; set; }
+
         [DisplayFormat(NullDisplayText = "NG")]
         public Grade? Grade { get; set; }
 

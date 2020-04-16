@@ -31,7 +31,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = Model.StudentId }) |
             @Html.ActionLink("Details", "Details", new { id = Model.StudentId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = Model.StudentId })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.StudentId }) |
+            @Html.ActionLink("Enroll","Enrollment","Enrollment", new {id=Model.StudentId})
         </td>
     </tr>
 </table>

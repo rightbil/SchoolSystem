@@ -25,6 +25,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolSystem.DbModels", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolSystem.Exceptions", "..\Exceptions\SchoolSystem.Exceptions.csproj", "{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIStartUp", "..\APIStartUp\APIStartUp.csproj", "{85B50851-9C69-40DF-89C2-1CB7B645D089}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JQuery", "JQuery", "{3A284B37-6D85-48EA-B5F5-F8A5023F6A3C}"
+	ProjectSection(SolutionItems) = preProject
+		HTMLPage1.html = HTMLPage1.html
+		Scripts\jquery-3.4.1.js = Scripts\jquery-3.4.1.js
+		Script1.js = Script1.js
+		StyleSheet1.css = StyleSheet1.css
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +65,10 @@ Global
 		{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C4101CA-3C3A-43D0-A0D3-A782FC4DA033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85B50851-9C69-40DF-89C2-1CB7B645D089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85B50851-9C69-40DF-89C2-1CB7B645D089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85B50851-9C69-40DF-89C2-1CB7B645D089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85B50851-9C69-40DF-89C2-1CB7B645D089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

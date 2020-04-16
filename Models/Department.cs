@@ -11,8 +11,10 @@ namespace SchoolSystem.DbModels.Model
     {
         [Key, Column("Department ID")]
         public int DepartmentId { get; set; }
+
         [Column("Department Name"),Required,StringLength(20)]
         public string DepartmentName { get; set; }
+
         public int Capacity { get; set; }
 
         public virtual ICollection<Instructor> Teachers { get; set; }

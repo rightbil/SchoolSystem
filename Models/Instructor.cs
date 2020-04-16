@@ -21,11 +21,11 @@ namespace SchoolSystem.DbModels.Model
         public DateTime? HireDate { get; set; }
         public Gender Gender { get; set; }
 
-        //Foreign Key
+        //Foreign Keys
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
+       
         public int CourseId { get; set; }
-
         public Course Course { get; set; }
         // Mule public int Department_DepartmentId { get; set; }
 

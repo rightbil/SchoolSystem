@@ -1,0 +1,65 @@
+﻿@{ Layout = null; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="2">
+    @*<link rel="stylesheet" href="../../style.css">*@
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Master JQuery </title>
+    
+</head>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('li')
+            .attr(
+                {
+                    title: 'some title'
+                })
+            .css('font-size',' 14pt')
+            .css('background-color','gray')
+            .css('color','black');
+    });
+</script>
+<body>
+    
+<div id="page" class="mydiv">
+    <h5 id="header">List</h5>
+  <ul>
+        <li id="one" class="hot"><em>fresh</em> figs</li>
+        <li id="two" class="hot">pine nuts </li>
+        <li id="three"> balsamic vinegar</li>
+    </ul>
+</div>
+<div id="TableContainerDiv">
+    <table id="DataTable">
+        <tr><td>Cell 1 Row 1</td></tr>
+        <tr><td>Cell 1 Row 2</td></tr>
+        <tr><td>
+                <table style="width: 100%">
+                    <tr><td> inner 1 and 1 </td></tr>
+                </table>
+            </td>
+        </tr>
+        <tr><td>Cell1 Row 3</td></tr>
+    </table>
+</div>
+<div class="BlueDiv">
+    <span> Blue Div</span>
+</div>
+<span class="Foo"> Span </span>
+<span class="Foo"> Span </span>
+<form method="post" action="#" id="myform">
+    <lable for="username">Username: </lable>
+    <input type="text" id="username" value ="username"/>
+    <div id="feedback"></div>
+    <lable for="password">Password: </lable>
+    <input type="password" id="password" value="password"/>
+    <br/>
+    <input type="submit" value="Sing up!" id="signup"/>
+</form>
+</body>
+</html>
+

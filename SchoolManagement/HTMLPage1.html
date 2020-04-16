@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="2">
+    <link rel="stylesheet" href="style.css">
+    <script src="~/JQuery/jquery-3.4.1.js"></script>
+    <title>Jquery</title>
+</head>
+
+<body>
+ <script type="text/javascript">
+     jQuery(document).ready(function () {
+         jquery('#signup').click(function() {
+             alert('JQuery Tutorial');
+         });
+     });
+       
+    </script>
+<div id="page">
+    <hl id="header" class=cssExampleOne>List</hl>
+    <h2>Mihret Has Done Eating!</h2>
+    <ul>
+        <li id="one" class="hot"><em>fresh</em> figs</li>
+        <li id="two" class="hot">pine nuts </li>
+        <li id="three" class="hot">honey </li>
+        <li id="four"> balsamic vinegar</li>
+    </ul>
+</div>
+
+
+<form method="post" action="#">
+    <lable for="username">Username: </lable>
+    <input type="text" id="username"/>
+    <div id="feedback"></div>
+    <lable for="password">Password: </lable>
+    <input type="password" id="password"/>
+    <input type="submit" value="Sing up!" id="signup"/>
+</form>
+</body>
+</html>

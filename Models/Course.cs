@@ -12,7 +12,9 @@ namespace SchoolSystem.DbModels.Model
         [Column(Order = 1)]
         [StringLength(20),Required]
         public string Title { get; set; }
+        [Column(Order = 2)]
         public int Credit { get; set; }
+        [Column(Order = 3)]
         public double Price { get; set; }
         public virtual ICollection<Instructor> Instructors { get; set; }
         public virtual ICollection<Enrollment> Enrollments { get; set; }

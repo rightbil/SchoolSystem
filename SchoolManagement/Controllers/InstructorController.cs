@@ -9,13 +9,13 @@ using System.Text;
 using System.IO;
 using System.Web;
 using System.Web.UI;
+using PagedList;
 
 namespace SchoolSystem.MVC.Models.Controllers
 {
     public class InstructorController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
-        public int PageSize = 4;
         public List<Instructor> SelectAllInstructors()
         {
             var teachers = db.instructors.Include(x => x.Department).Include(x => x.Course).ToList();
@@ -55,14 +55,12 @@ namespace SchoolSystem.MVC.Models.Controllers
             };
         }
 
-        [Authorize]
-        public ActionResult Index(int page= 1)
+        ///[Authorize] will through 404 - do not have permission.
+        
+        public ActionResult Index(int ? page)
         {
-           
-            return View(SelectAllInstructors()
-                             .OrderBy(p=>p.InstructorId)
-                             .Skip((page-1) * PageSize)
-                             .Take(PageSize));
+        return View(SelectAllInstructors().ToPagedList(page ?? 1,10));
+
         }
         public ActionResult Details(int id)
         {
@@ -262,7 +260,7 @@ namespace SchoolSystem.MVC.Models.Controllers
     }
     public static class ViewExtensions
     {
-        public static string RenderToString(this PartialViewResult partialView, HttpContextBase httpContext, object model)
+    public static string RenderToString(this PartialViewResult partialView, HttpContextBase httpContext, object model)
         {
             if (httpContext == null)
             {
