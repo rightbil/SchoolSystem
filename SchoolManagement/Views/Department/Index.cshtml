@@ -1,35 +1,26 @@
-﻿@model IEnumerable<SchoolSystem.MVC.Models.Department>
+﻿@using PagedList
+@using PagedList.Mvc
+
+@model IPagedList<SchoolSystem.MVC.Models.Department>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<p>@Html.ActionLink("Add Department", "Create")</p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.DepartmentName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capacity)
-        </th>
-        <th></th>
+        <th>@Html.DisplayName("Department")</th>
+        <th>@Html.DisplayName("Capacity")</th>
+        <th>Admin Panel</th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
+            <td>@Html.DisplayFor(modelItem => item.DepartmentName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.DepartmentId }) |
@@ -39,3 +30,5 @@
     }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "Department", new { page }))

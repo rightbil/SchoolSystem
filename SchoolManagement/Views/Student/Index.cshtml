@@ -1,58 +1,26 @@
-﻿@using SchoolSystem.DbModels.Model
+﻿@*@using SchoolSystem.DbModels.Model*@
 @using PagedList
 @using PagedList.Mvc
 
-@*@model IEnumerable<SchoolSystem.MVC.Models.Student>*@
 @model IPagedList<SchoolSystem.MVC.Models.Student>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <div style="font-size: 12px">
-        <p>
-            @Html.ActionLink("Add Student", "Create")
-        </p>
-        @*<table class="table">
-            <tr>
-                <th>
-                    <h6>@Html.DisplayNameFor(model => )</h6>
-                </th>
-                <th>
-                    <h6> @Html.DisplayNameFor(model => model.EmailAddress)</h6>
-                </th>
-                <th>
-                    <h6> @Html.DisplayNameFor(model => model.PhoneNumber)</h6>
-                </th>
-                <th>
-                    <h6> @Html.DisplayNameFor(model => model.DateOfBirth)</h6>
-                </th>
-                <th>
-                    <h6> @Html.DisplayNameFor(model => model.Url)</h6>
-                </th>
-                <th>
-                    <h6> @Html.DisplayNameFor(model => model.Department)</h6>
-                </th>
-                <th>
-                    <h6> Admin Panel</h6>
-                </th>
-            </tr>
-        </table>*@
-        @foreach (var item in Model)
-        {
+<div class="table" style="font-size: 12px">
+    <p>
+        @Html.ActionLink("Add Student", "Create")
+        // Mule add header here
+    </p>
+    
+        @Html.Partial("PartialViewStudent", Model)
+    
 
-            @Html.Partial("PartialViewStudent", item)
-
-        }
-    </div>
+</div>
 
 @Html.PagedListPager(Model, page => Url.Action("Index",
-    new
-    {
-        page,
-        /*searchBy = Request.QueryString["searchBy"],
-        search = Request.QueryString["search"]*/
-    }))
+    new{page}))
 
 
 

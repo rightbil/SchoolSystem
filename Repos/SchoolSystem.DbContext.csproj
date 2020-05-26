@@ -51,69 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202003300516180_Migrn.cs" />
-    <Compile Include="Migrations\202003300516180_Migrn.designer.cs">
-      <DependentUpon>202003300516180_Migrn.cs</DependentUpon>
+    <Compile Include="Migrations\202004211630410_Migrn.cs" />
+    <Compile Include="Migrations\202004211630410_Migrn.designer.cs">
+      <DependentUpon>202004211630410_Migrn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003300520047_Migrn1.cs" />
-    <Compile Include="Migrations\202003300520047_Migrn1.designer.cs">
-      <DependentUpon>202003300520047_Migrn1.cs</DependentUpon>
+    <Compile Include="Migrations\202004220105256_Migrn1.cs" />
+    <Compile Include="Migrations\202004220105256_Migrn1.designer.cs">
+      <DependentUpon>202004220105256_Migrn1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003311409311_Mirgrn.cs" />
-    <Compile Include="Migrations\202003311409311_Mirgrn.designer.cs">
-      <DependentUpon>202003311409311_Mirgrn.cs</DependentUpon>
+    <Compile Include="Migrations\202004220114475_Migrn2.cs" />
+    <Compile Include="Migrations\202004220114475_Migrn2.designer.cs">
+      <DependentUpon>202004220114475_Migrn2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003311427080_Mirgrn1.cs" />
-    <Compile Include="Migrations\202003311427080_Mirgrn1.designer.cs">
-      <DependentUpon>202003311427080_Mirgrn1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003311428090_Mirgrn2.cs" />
-    <Compile Include="Migrations\202003311428090_Mirgrn2.designer.cs">
-      <DependentUpon>202003311428090_Mirgrn2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003311437394_Migrn2.cs" />
-    <Compile Include="Migrations\202003311437394_Migrn2.designer.cs">
-      <DependentUpon>202003311437394_Migrn2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003311811146_Migrn3.cs" />
-    <Compile Include="Migrations\202003311811146_Migrn3.designer.cs">
-      <DependentUpon>202003311811146_Migrn3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003312207498_Mirgn.cs" />
-    <Compile Include="Migrations\202003312207498_Mirgn.designer.cs">
-      <DependentUpon>202003312207498_Mirgn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003312209073_Migrn4.cs" />
-    <Compile Include="Migrations\202003312209073_Migrn4.designer.cs">
-      <DependentUpon>202003312209073_Migrn4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004010111205_Migrn5.cs" />
-    <Compile Include="Migrations\202004010111205_Migrn5.designer.cs">
-      <DependentUpon>202004010111205_Migrn5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004010115205_Migrn6.cs" />
-    <Compile Include="Migrations\202004010115205_Migrn6.designer.cs">
-      <DependentUpon>202004010115205_Migrn6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004010141294_Migrn7.cs" />
-    <Compile Include="Migrations\202004010141294_Migrn7.designer.cs">
-      <DependentUpon>202004010141294_Migrn7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004050158547_Migrn8.cs" />
-    <Compile Include="Migrations\202004050158547_Migrn8.designer.cs">
-      <DependentUpon>202004050158547_Migrn8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004050206593_Migrn9.cs" />
-    <Compile Include="Migrations\202004050206593_Migrn9.designer.cs">
-      <DependentUpon>202004050206593_Migrn9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004062154285_Migrn10.cs" />
-    <Compile Include="Migrations\202004062154285_Migrn10.designer.cs">
-      <DependentUpon>202004062154285_Migrn10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004070037520_Migrn11.cs" />
-    <Compile Include="Migrations\202004070037520_Migrn11.designer.cs">
-      <DependentUpon>202004070037520_Migrn11.cs</DependentUpon>
+    <Compile Include="Migrations\202004220153577_Migrn3.cs" />
+    <Compile Include="Migrations\202004220153577_Migrn3.designer.cs">
+      <DependentUpon>202004220153577_Migrn3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,53 +82,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003300516180_Migrn.resx">
-      <DependentUpon>202003300516180_Migrn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004211630410_Migrn.resx">
+      <DependentUpon>202004211630410_Migrn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003300520047_Migrn1.resx">
-      <DependentUpon>202003300520047_Migrn1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004220105256_Migrn1.resx">
+      <DependentUpon>202004220105256_Migrn1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003311409311_Mirgrn.resx">
-      <DependentUpon>202003311409311_Mirgrn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004220114475_Migrn2.resx">
+      <DependentUpon>202004220114475_Migrn2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003311427080_Mirgrn1.resx">
-      <DependentUpon>202003311427080_Mirgrn1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003311428090_Mirgrn2.resx">
-      <DependentUpon>202003311428090_Mirgrn2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003311437394_Migrn2.resx">
-      <DependentUpon>202003311437394_Migrn2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003311811146_Migrn3.resx">
-      <DependentUpon>202003311811146_Migrn3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003312207498_Mirgn.resx">
-      <DependentUpon>202003312207498_Mirgn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003312209073_Migrn4.resx">
-      <DependentUpon>202003312209073_Migrn4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004010111205_Migrn5.resx">
-      <DependentUpon>202004010111205_Migrn5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004010115205_Migrn6.resx">
-      <DependentUpon>202004010115205_Migrn6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004010141294_Migrn7.resx">
-      <DependentUpon>202004010141294_Migrn7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004050158547_Migrn8.resx">
-      <DependentUpon>202004050158547_Migrn8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004050206593_Migrn9.resx">
-      <DependentUpon>202004050206593_Migrn9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004062154285_Migrn10.resx">
-      <DependentUpon>202004062154285_Migrn10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004070037520_Migrn11.resx">
-      <DependentUpon>202004070037520_Migrn11.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004220153577_Migrn3.resx">
+      <DependentUpon>202004220153577_Migrn3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

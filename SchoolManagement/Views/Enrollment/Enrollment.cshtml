@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Enrollment";
 }
-<h6>Course Enrollment for Students</h6>
 <script>
     $(document).ready(function () {
         $("#btnEnroll").click(function () {
@@ -14,35 +13,28 @@
                     url:  "Enrollment",
                     data: {
                         studentId: $("#ddstudent").val(),
-                        courseId: $("#ddcourse").val()
+                        courseId:  $("#ddcourse").val()
                     }
                 });
         });
     });
-
 </script>
-<p>
-    @section Menu{
+@section Menu{
 
         @Html.ActionLink("List", "Index")<br />
-        @*
-            @Html.ActionLink("Details", "Details", new{id=Model.Id})<br />
-            @Html.ActionLink("Delete", "Delete",new {id=Model.Id})<br />
-        *@ }
+    }
     <div class="form-horizontal">
-        <h4>Enrollment</h4>
+        <h6>Enrollment</h6>
         <hr />
-        @Html.Display("Student List")
-        @Html.DropDownList("Student", (IEnumerable<SelectListItem>)ViewBag.students, "select student", new { Id = "ddstudent" })
-
-        @Html.Display("Available Course")
+        @Html.Label("Student List")
+        @Html.DropDownList("Student", (IEnumerable<SelectListItem>)ViewBag.students, "select student", new { Id = "ddstudent"  })
+        <br/>
+        @Html.Label("Available Course")
         @Html.DropDownList("courses", null, "select course", new { Id = "ddcourse" })
 
     </div>
     <div class="form-group">
-        @*<div class="col-md-offset-2 col-md-10">*@
         <button type="submit" id="btnEnroll" class="btn btn-primary">Add Course</button>
-        @*</div>*@
     </div>
-</p>
+
 

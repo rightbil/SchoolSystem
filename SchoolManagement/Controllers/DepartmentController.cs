@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using PagedList;
 using SchoolSystem.DbContext;
 using SchoolSystem.MVC.Models;
 namespace SchoolSystem.MVC.Models.Controllers
@@ -10,64 +12,24 @@ namespace SchoolSystem.MVC.Models.Controllers
     public class DepartmentController : Controller
     {
         private SchoolDbContext db = new SchoolDbContext();
-
-        public ActionResult Index()
+        public ActionResult Index(int ? page)
         {
-            var fromDb = db.departments.OrderBy(x => x.DepartmentName).ToList();
-            List<Department> listOfdepts = new List<Department>();
-            foreach (var d in fromDb)
-            {
-                listOfdepts.Add(
-
-                    new Department()
-                    {
-                         DepartmentId = d.DepartmentId,
-                        DepartmentName = d.DepartmentName,
-                        Capacity = d.Capacity
-
-                    }
-                    );
-            }
-
-            return View(listOfdepts);
+           return View(SelectAllDepartments()
+                 .ToPagedList(page??1,8));
         }
-
-
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var fromDb = db.departments.FirstOrDefault(x => x.DepartmentId == id);
-
-            Department department = new Department()
-            {
-                DepartmentId = fromDb.DepartmentId,
-                DepartmentName = fromDb.DepartmentName,
-                Capacity = fromDb.Capacity
-
-            };
-            if (department == null)
-            {
-                return HttpNotFound();
-            }
-            return View(department);
+            return View(SelectADepartment(id));
         }
-
-
         public ActionResult Create()
         {
             return View();
         }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "DepartmentId,DepartmentName,Capacity")] Department department)
         {
-            SchoolSystem.DbModels.Model.Department dept = new SchoolSystem.DbModels.Model.Department()
+            var dept = new DbModels.Model.Department()
             {
                 DepartmentName = department.DepartmentName,
                 Capacity = department.Capacity
@@ -82,38 +44,15 @@ namespace SchoolSystem.MVC.Models.Controllers
 
             return View(department);
         }
-
-
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var fromDb = db.departments.FirstOrDefault(x => x.DepartmentId == id);
-
-            Department dept = new Department()
-            {
-                DepartmentId = fromDb.DepartmentId,
-                DepartmentName = fromDb.DepartmentName,
-                Capacity = fromDb.Capacity
-            };
-
-            if (dept == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dept);
+           return View(SelectADepartment(id));
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "DepartmentId,DepartmentName,Capacity")] Department department)
-
-
-
         {
-            SchoolSystem.DbModels.Model.Department dept = new SchoolSystem.DbModels.Model.Department()
+            var dept = new DbModels.Model.Department()
             {
                 DepartmentId = department.DepartmentId,
                 DepartmentName = department.DepartmentName,
@@ -129,38 +68,18 @@ namespace SchoolSystem.MVC.Models.Controllers
             }
             return View(department);
         }
-
-
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var fromDb = db.departments.Find(id);
-           Department department = new Department()
-            {
-                DepartmentId =  fromDb.DepartmentId,
-                DepartmentName = fromDb.DepartmentName,
-                Capacity = fromDb.Capacity
-            };
-            if (department == null)
-            {
-                return HttpNotFound();
-            }
-            return View(department);
+           return View(SelectADepartment(id));
         }
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var fromDb = db.departments.FirstOrDefault(x=>x.DepartmentId==id);
-            db.departments.Remove(fromDb);
+            db.departments.Remove(db.departments.FirstOrDefault(x => x.DepartmentId == id));
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -169,12 +88,38 @@ namespace SchoolSystem.MVC.Models.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult ListAllDepartments()
+        public List<Department> SelectAllDepartments()
         {
-            var depts = db.departments.OrderByDescending(x=>x.Capacity).ToList();
+            var listOfdepts = new List<Department>();
+            foreach (var d in db.departments)
+            {
+                listOfdepts.Add(
 
-            return View(depts);
+                    new Department()
+                    {
+                        DepartmentId = d.DepartmentId,
+                        DepartmentName = d.DepartmentName,
+                        Capacity = d.Capacity
+
+                    }
+                );
+            }
+
+            return listOfdepts;
+        }
+        public Department SelectADepartment(int id)
+        {
+            var depts =  db.departments.FirstOrDefault(d=>d.DepartmentId==id);
+
+            return new Department()
+            {
+                DepartmentId = depts.DepartmentId,
+                DepartmentName = depts.DepartmentName,
+                Capacity=depts.Capacity,
+
+            };
+
+            
         }
     }
 }

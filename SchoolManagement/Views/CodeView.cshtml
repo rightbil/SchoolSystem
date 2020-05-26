@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "CodeView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CodeView</h2>
+@Html.ActionLink("link text", "someaction", "somecontroller", new { id = "123" }, null)
+
+<a href="/somecontroller/someaction/123">link text</a>
+
+Url.Action("someaction", "somecontroller", new { id = "123" }) generates:
+
+/somecontroller/someaction/123
+
+
+@HTML.ActionLink generates a HTML anchor tag. 
+While @Url.Action generates a URL for you. You can easily understand it by;
+
+// 1. <a href="/ControllerName/ActionMethod">Item Definition</a>
+@HTML.ActionLink("Item Definition", "ActionMethod", "ControllerName")
+
+// 2. /ControllerName/ActionMethod
+@Url.Action("ActionMethod", "ControllerName")
+
+// 3. <a href="/ControllerName/ActionMethod">Item Definition</a>
+<a href="@Url.Action("ActionMethod", "ControllerName")"> Item Definition</a>
+
+
+
+@using (Html.BeginForm("Index", "Company", FormMethod.Get))
+{
+    <p>
+        Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+        <input type="button" value="Clear" onclick="location.href='@Url.Action("Index","Company")'" />
+    </p>
+}
+
+THE PROBLEM
+First, let's see what the problem is with the current (i.e. EnumDropDownListFor)
+implementation in MVC 5. Using the helper, the values in the drop down box, 
+which is bound to the enum in your model, will look like this:
+
+// Enum in ViewModel
+public enum TestEnum
+{
+    HelloFromOne,
+    HelloFromTwo,
+    HelloFromThree
+}
+Drop-down values in HTML:
+
+HelloFromOne
+HelloFromTwo
+HelloFromThree
+Obviously this is neither readable or overly user-friendly.
+
+THE SOLUTION
+The solution to this problem works in two ways:
+
+it provides a handy HTML helper if you have to work with MVC 4 or less
+it improves the default output of MVC 5's HTML Helper
+To improve the appearence of the values in the bound drop down, 
+we can decorate the enum values with the Description attribute. 
+The description can contain the readable text that you want to display to your 
+users without compromising the ease that comes from binding directly to an enum.
+Enough with the talking - show me the code!
+
+THE IMPLEMENTATION
+First we need to update the enum we used in the previous example to include 
+description properies for each enum value:
+
+public enum TestEnum
+{
+    [Description("First choice")]
+    HelloFromOne,
+
+    [Description("Second choice")]
+    HelloFromTwo,
+
+    [Description("Third choice")]
+    HelloFromThree
+}
+The HTML helper code, where all the magic happens, is right below:
+
+public static MvcHtmlString CustomEnumDropDownListFor<TModel, TEnum>
+    (
+    this HtmlHelper<TModel>htmlHelper, Expression<Func<TModel, TEnum>> expression, object htmlAttributes)
+{
+    var metadata = ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData);
+    var values = Enum.GetValues(typeof(TEnum)).Cast<TEnum>();
+
+    var items =
+        values.Select(
+           value =>
+           new SelectListItem
+           {
+               Text = GetEnumDescription(value),
+               Value = value.ToString(),
+               Selected = value.Equals(metadata.Model)
+           });
+           var attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+   return htmlHelper.DropDownListFor(expression, items, attributes);
+}
+
+public static string GetEnumDescription<TEnum>(TEnum value)
+{
+    var field = value.GetType().GetField(value.ToString());
+    var attributes = (DescriptionAttribute[])field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+    return attributes.Length > 0 ? attributes[0].Description : value.ToString();
+}
+The first method creates the HTML helper while the second one provides a way to retrieve the Description attribute from the enum. Easy as that.
+
+To use this extension, all you have to do in your MVC view is call it like this:
+
+@Html.CustomEnumDropDownListFor(m => m.TestEnum, new { @class = "dropdownstyle" })

@@ -19,6 +19,7 @@ namespace SchoolSystem.DbModels.Model
 
         public virtual ICollection<Instructor> Teachers { get; set; }
         public virtual ICollection<Student> Students { get; set; }
+        /*public virtual ICollection<Course> Courses { get; set; }*/
        }
 }
 

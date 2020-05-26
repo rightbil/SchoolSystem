@@ -5,61 +5,319 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="2">
-    @*<link rel="stylesheet" href="../../style.css">*@
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Master JQuery </title>
-    
-</head>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('li')
-            .attr(
+    <style type="text/css">
+        .BlueDiv {
+            background-color: navy;
+            color: white;
+            width: 200px;
+        }
+
+        .RedDiv {
+            background-color: red;
+            color: white;
+            width: 200px;
+        }
+
+        .Foo {
+            background-color: gray;
+        }
+
+        .Highlight {
+            background-color: yellowgreen;
+            color: black;
+        }
+    </style>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //change color for all p and div tags
+
+            /*
+            $('div,p').css('background-color', 'blueviolet');
+*/
+
+            //display the html for all the div tags
+            /*$('div').each(function () {
+                alert($(this).html());
+            });*/
+
+            //change color for all sections having myform class
+            /*
+            $('.myform').css('background-color', 'GrayText');
+            $('.myform').css('border', '1px solid black');
+*/
+
+            //change the backgroud color of all text and password type input boxes
+            /*
+            var inputs = $('input[type="text"],input[type = "password"]');
+            inputs.css('background-color', 'yellowgreen');
+*/
+
+            // selects all inputs and dispaly their values using index
+
+            /*
+            var coll = $(':input'); alert($(coll[0]).val());
+*/
+
+            // selects all inputs and display each values
+            /*
+            $(':input').each(function () { alert($(this).val()); });
+*/
+
+            // sets all input values to foo
+            /*
+            $(':input').each(function () { alert($(this).val('foo')); });
+            */
+            //
+            /*
+            $('form :input').each(function () { alert($(this).val()); });
+*/
+            /*
+
+                        $('#myform :input').each(function () { alert($(this).val()); });
+                        $('div:contains("Mihret")').css('background-color', 'blue');
+            */
+
+            //
+            /*var output = $('#sample');
+            $('li').each(function (index) {
+                output.html(output.html() + "<br/>" + index + " " + $(this).text());
+
+            });*/
+
+            /*$(document).ready(function () {
+                // var output = $('#sample');
+                var html = '';
+                $('li').each(function (index) {
+                    html += "<br/>" + index + " " + $(this).text();
+
+                });
+                var output = $('#sample');
+                output.html(html);
+            });*/
+
+            /*
+            var html = '';
+            $('li').each(function (index, element) {
+                html += "<br/>" + index + " " + $(element).text();
+            });
+            var output = $('#sample');
+            output.html(html);
+*/
+
+
+            /*
+            $('li').each(function (index, element) { this.title = "some title"; });
+
+            $('li').each(function (index, element) { $(this).attr('title', 'some title'); });
+*/
+
+            /*
+            $('li').attr(
                 {
-                    title: 'some title'
-                })
-            .css('font-size',' 14pt')
-            .css('background-color','gray')
-            .css('color','black');
-    });
-</script>
+                    title: 'some title',
+                    style: 'font-size: 14pt;' +
+                        ' background-color:gray' +
+                        ';color:black'
+                }
+            );
+*/
+
+
+            /*$('li')
+                .attr(
+                    {
+                        title: 'some title'
+                    })
+                .css('font-size', ' 14pt')
+                .css('background-color', 'gray')
+                .css('color', 'black');
+        });*/
+            // Wrapping a tag
+            /*$(document).ready(function () {
+                $('span.Foo').wrapAll('<div class="BlueDiv"> Wrapping the snap tag div </div>');
+            });*/
+            //   $('span.Foo').wrapAll('<div class="BlueDiv"> Wrapping the snap tag div </div>');
+            /*$('li,div.BlueDiv,div.RedDiv')
+                .attr(
+                    {
+                        title: 'some title'
+                    })
+                .css({
+                    'font-size': ' 14pt',
+                    'background-color':'gray',
+                    'color': 'black'
+                }).text('Change Color');*/
+
+            /*$('input[type=text]').addClass('Highlight');
+            $('#username').removeClass('Highlight');*/
+
+            /*$('#signup').click(
+
+                function () {
+                    var fullname = 'Feedback: ' + $('#fullname').val();
+                    var username = $('#username').val();
+
+                    $('#feedback')
+                        //.append('<label id=feedback> Feedback: </label>');
+                        .text(fullname + ' & ' + username);
+                });
+            // for select options
+            $('#state').change(function () {
+                $('#feedback').text = $(this).val();
+                // alert($(this).val());
+            });*/
+
+            /*$('#header,tr,div').mouseenter(function() {
+                $(this).toggleClass('Highlight');
+                $(this).css('cursor', 'pointer');
+            }).mouseleave(function() {
+                $(this).toggleClass('Highlight');
+            }).mouseup(function(e) {
+               alert($(e.target).attr('id'));
+                $(this).text('X: ' + e.pageX + ' and ' + ' Y' + e.pageY);
+            });*/
+
+            // binding
+
+            /*$('#header').on('mouseenter mouseleave',
+                function() {
+                    $(this).toggleClass('Highlight');
+                }
+            );*/
+            // live ( removed after 1.9) , delegate ( new version of live from 1.4 and continue 1.9) and On bind was before 1.7 after that on
+            /*var header = $('#header');
+            header.bind('mouseenter mouseleave mouseup',
+                function(event) {
+                    var current = $(this).val();
+                    $(this).toggleClass('Highlight')
+                        .css('cursor', 'pointer');
+
+                    if (event.type == 'mouseleave') {
+                        $(this).append(current + ' X: ' + event.pageX + ' Y: ' + event.pageY);
+                    }
+
+                });
+            header.off();*/
+            // On ( 1.7) is a new replacement of bind() delegate() live()
+
+            /*$('tr').on('click', function() {
+                alert($(this).html());
+            });*/
+            //var table = $('#TableContainerDiv');
+            /*            var tbody = $('#DataTable tbody');
+                        $('addRow').on('click',
+                            function () {
+
+                                tbody.append('<tr> <td> a row added </td> </tr>');
+                            });
+                        //table.find('tbody').on('click', 'td', function () {
+                        tbody.on('click',
+                            'td',
+                            function() {
+                                alert($(this).text());
+                            });*/
+            // hover is mouseenter / mouseleave ( we can write functions for both)
+            /*$('#DataTable tr').hover(function() {
+                $(this).toggleClass('Highlight');
+            });*/
+
+            /*$('#DataTable tr').Toggle(
+                function () {
+                    //mouseenter
+                    $(this).css('background-color', '#efefef');
+                },
+                function () {
+                    //mouseleave
+                    $(this).css('background-color', '#fff');
+                },
+                function () {
+                    //mouseleave
+                    $(this).css('background-color', 'yellow');
+                }
+            );*/
+            // Ajax - common functions read them or practice again
+            /*load
+            get
+            getJson
+            ajax */
+
+            /*$('#ajaxload').click(function () {
+                $('#feedback').load('~/AjaxUrl.cshtml');
+
+            });*/
+            dialog();
+        });
+        function dialog() {
+            $('#feedback')._dialog();
+        }
+    </script>
+</head>
 <body>
-    
-<div id="page" class="mydiv">
-    <h5 id="header">List</h5>
-  <ul>
-        <li id="one" class="hot"><em>fresh</em> figs</li>
-        <li id="two" class="hot">pine nuts </li>
-        <li id="three"> balsamic vinegar</li>
-    </ul>
-</div>
+    <div id="page" class="mydiv">
+        <h6 id="header">List of different code fragments on same page</h6>
+        <ul id="lists">
+            <li id="one" class="hot"><em>fresh</em> figs</li>
+            <li id="two" class="hot">pine nuts </li>
+            <li id="three"> balsamic vinegar</li>
+        </ul>
+    </div>
+    <div class="BlueDiv"> <span> Blue Horizontal Division here</span></div>
+    <div class="RedDiv">  <span> Red Horizontal Division here</span></div>
+    <span class="Foo"> Span One </span> <br />
+    <span class="Foo"> Span Two </span>
+    <br />
+    <form method="post" action="#" id="myform">
+        <lable for="firstname">First Name: </lable><input type="text" id="firstname" onfocus="FocusBlur(this)" onBlur="FocusBlur(this)" value="" /><br />
+        <lable for="lastname">Last Name: </lable><input type="text" id="lastname" onfocus="FocusBlur(this)" onBlur="FocusBlur(this)" value="" /><br />
+        <lable for="username">User Name: </lable><input type="text" id="username" onfocus="FocusBlur(this)" onBlur="FocusBlur(this)" value="" /><br />
+        <lable for="password">Password: </lable><input type="password" id="password" value="password" /><br />
+        <label for="state">State</label>
+        <select id="state" mulitple>
+            <optgroup label="East">
+                <option value="DC"> Washington DC </option>
+                <option value="VA" selected="true"> Virginia</option>
+            </optgroup>
+            <optgroup label="West">
+                <option value="ID"> Idaho</option>
+                <option value="CA"> California</option>
+            </optgroup>
+        </select>
+        <br />
+        <lable for="comment">Comment</lable><input type="text" id="comment" spellcheck="true" placeholder="Only 255 characters" maxlength="255" /><br />
+        <input type="button" value="Sign up!" id="signup" />
+        </form>
+    <button id="addRow"> Add Row </button>
 <div id="TableContainerDiv">
-    <table id="DataTable">
-        <tr><td>Cell 1 Row 1</td></tr>
-        <tr><td>Cell 1 Row 2</td></tr>
-        <tr><td>
-                <table style="width: 100%">
-                    <tr><td> inner 1 and 1 </td></tr>
+    <table id="DataTable" border="2">
+        <tbody>
+        <thead> Column Header </thead>
+        <tr><td>R 1 C 1</td></tr>
+        <tr><td>R 2 C 2</td></tr>
+        <tr>
+            <td>
+                <table border="1">
+                    <tr>
+                        <td> inner r 1 and c 1 | </td>
+                        <td> inner r 1 and c 2 </td>
+                    </tr>
+                    <tr>
+                        <td> inner r 2 and c 1 | </td>
+                        <td> inner r 2 and c 2 </td>
+                    </tr>
                 </table>
             </td>
         </tr>
-        <tr><td>Cell1 Row 3</td></tr>
+        <tr><td>R 3 C 1</td></tr>
+        </tbody>
     </table>
 </div>
-<div class="BlueDiv">
-    <span> Blue Div</span>
-</div>
-<span class="Foo"> Span </span>
-<span class="Foo"> Span </span>
-<form method="post" action="#" id="myform">
-    <lable for="username">Username: </lable>
-    <input type="text" id="username" value ="username"/>
-    <div id="feedback"></div>
-    <lable for="password">Password: </lable>
-    <input type="password" id="password" value="password"/>
-    <br/>
-    <input type="submit" value="Sing up!" id="signup"/>
-</form>
+<button id="ajaxload">Ajax Call </button>
+<div id="feedback">default feedback</div>
 </body>
 </html>
 

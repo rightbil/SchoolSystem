@@ -8,32 +8,26 @@ namespace SchoolSystem.MVC.Models
 {
     public class Student : IComparable<Student>
     {
-        [HiddenInput(DisplayValue = false)]
+       // [HiddenInput(DisplayValue = false)]
         [Display(Name = "Student ID"), Key]
         public int StudentId { get; set; }
-  //      [RegularExpression(@"^(([A-Za-z]+[\s] {1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage= "Last name should not contain either special character or numbers")
-
+       //[RegularExpression(@"^(([A-Za-z]+[\s] {1}[A-za-z]+)|([A-Za-z]+))$", ErrorMessage= "Last name should not contain either special character or numbers")
         [Display(Name = "Last Name"), Required(ErrorMessage = "Last name is Required"),
         StringLength(20, MinimumLength = 1, ErrorMessage = "You need to give a long enough first name")]
-
         public string LastName { get; set; }
-
         [Display(Name = "First Name"), Required(ErrorMessage = "First name is required"),
-         StringLength(20, MinimumLength = 1, ErrorMessage = "You need to give a long enough last name")]
+        StringLength(20, MinimumLength = 1, ErrorMessage = "You need to give a long enough last name")]
         public string FirstName { get; set; }
-
         [DisplayName("Full Name")] 
         public string FullName => LastName + " " + FirstName;
-
-
         [RegularExpression(@"^[\w-\._\+%]+@(?:[\w-]+\.)+[\w]{2,6}$")]
         //[ReadOnly(true)]
         [DataType(DataType.EmailAddress), Display(Name = "Email Address"),
          Required(ErrorMessage = "Email address is required")]
         public string EmailAddress { get; set; }
 
-        [DataType(DataType.EmailAddress), Display(Name = "Confirm Email"),
-         System.ComponentModel.DataAnnotations.Compare("EmailAddress", ErrorMessage = "Confirm email do not match")]
+        [DataType(DataType.EmailAddress), Display(Name = "Confirm Email")]
+         //System.ComponentModel.DataAnnotations.Compare("EmailAddress", ErrorMessage = "Confirm email do not match")]
         public string ConfirmEmailAddress { get; set; }
 
         [Display(Name = "Password"), Required(ErrorMessage = "Password is required"),
@@ -41,7 +35,7 @@ namespace SchoolSystem.MVC.Models
          DataType(DataType.Password)]
         public String Password { get; set; }
 
-        [Display(Name = "Confirm Password"), Required(ErrorMessage = "Password is required"),
+        [Display(Name = "Confirm Password"), 
          DataType(DataType.Password)]
         [System.ComponentModel.DataAnnotations.Compare("Password",
             ErrorMessage = "Confirm password do not match with password")]
@@ -51,9 +45,9 @@ namespace SchoolSystem.MVC.Models
          DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date of Birth"), Required(ErrorMessage = "Date of Birth is required"),
-         DataType(DataType.Date)]
+        DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Zip Code"), Required(ErrorMessage = "Zipcode is required"), DataType(DataType.PostalCode)]
@@ -65,11 +59,14 @@ namespace SchoolSystem.MVC.Models
         [UIHint("WindowForUrl")]
         [Required, DataType(DataType.Url)]
         public string Url { get; set; }
-        [HiddenInput(DisplayValue = false)] public DateTime RegisteredOn { get; set; }
-        public int Age()
+
+        //[HiddenInput(DisplayValue = false)] 
+        public DateTime RegisteredOn { get; set; }
+        /*public int Age()
             => DateTime.Now.DayOfYear < RegisteredOn.DayOfYear
                 ? DateTime.Now.Year - RegisteredOn.Year
                 : DateTime.Now.Year - RegisteredOn.Year - 1;
+        */
         public int DepartmentId { get; set; }
         public string Department { get; set; }
         public int CompareTo(Student other)
@@ -80,7 +77,15 @@ namespace SchoolSystem.MVC.Models
     public enum Gender
     {
         Male,
-        Female,
-        Undefined
+        Female
+    }
+    public enum Zipcode
+    {
+        [Description("Maryland residents ")]
+        Maryland = 20401,
+        [Description("DC residents")]
+        Washington = 20202,
+        [Description("Virginia residents ")]
+        Virginia = 30330
     }
 }

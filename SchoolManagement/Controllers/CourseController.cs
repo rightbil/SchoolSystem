@@ -1,28 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.UI;
 using Microsoft.Ajax.Utilities;
+using PagedList;
+using SchoolManagement.ViewModels;
 using SchoolSystem.MVC.Models;
 using SchoolSystem.DbContext;
 using SchoolSystem.Exceptions;
 using SchoolSystem.Customize;
+using SchoolSystem.MVC.Models.Controllers;
+
 namespace SchoolSystem.Controllers
 {
     public class CourseController : Controller
     {
-        private SchoolDbContext db = new SchoolDbContext();
-
-        public ActionResult SummaryList()
+        private readonly SchoolDbContext db = new SchoolDbContext();
+        //TODO: it is refreshing whole page
+        /// <summary>
+        /// uses ajax to update the page for all , top3 and bottom3
+        /// 
+        /// </summary>
+        public ActionResult Summary()
         {
-
             return View();
         }
-
+        /// <summary>
+        /// the following methods are used in the Summary action above
+        /// </summary>
+        /// <returns></returns>
         public PartialViewResult All()
         {
             var allCourses = SelectAllCourses();
@@ -30,7 +41,7 @@ namespace SchoolSystem.Controllers
         }
         public PartialViewResult TopThreeCourses()
         {
-            var topCourses = SelectAllCourses().OrderByDescending(x=>x.Price).Take(3).ToList();
+            var topCourses = SelectAllCourses().OrderByDescending(x => x.Price).Take(3).ToList();
             return PartialView("PartialViewCourse", topCourses);
         }
         public PartialViewResult BottomThreeCourses()
@@ -39,12 +50,17 @@ namespace SchoolSystem.Controllers
 
             return PartialView("PartialViewCourse", bottomCourses);
         }
-        //[OutputCache(Duration = 20)] [ChildActionOnly] // this works as expected
-        //[OutputCache(CacheProfile = "1MinuteCache")] [ChildActionOnly] // assume "1MinuteCache" is added in web config this don't work so it needs customization
-        // why attribute is not there I think it is stadared Mule
-        [SsPartialCache("1MinuteCache")] // this is the custom cache
-        public ActionResult Index(string sortBy)
+        //TODO:Multiple Delete needs fix
+        /// <summary>
+        /// sort by title or price - multiple select and delete
+        /// </summary>
+        /// <param name="sortBy"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Index(string sortBy, int? page)
         {
+            // return View(SelectAllCourses().ToList());
+            /*var listOfCourse = db.courses.Join(db.departments, c => c.CourseId, d => d.DepartmentId,(c, d) => new { Department = d.DepartmentName,Title = c.Title,Credit = c.Credit,Price = c.Price});*/
             var listOfCourses = SelectAllCourses().AsQueryable();
             ViewBag.SortByTitle = string.IsNullOrEmpty(sortBy) ? "Title desc" : "";
             ViewBag.SortByCredit = sortBy == "Credit" ? "Credit Desc" : "Credit";
@@ -63,28 +79,23 @@ namespace SchoolSystem.Controllers
                     listOfCourses = listOfCourses.OrderBy(a => a.Title);
                     break;
             }
-            return View(listOfCourses);
+            return View(listOfCourses.ToPagedList(page ?? 1, 10));
         }
-        [HttpGet]
-        public ActionResult Index2()
+        //TODO: individual and all select shall work properly
+        /// <summary>
+        /// multiple delete - individual and all select shall work properly
+        /// </summary>
+        /// <param name="courseIdToDelete"></param>
+        /// <returns></returns>
+        public ActionResult MultipleDelete(IEnumerable<int> courseIdToDelete)
         {
-            return View(SelectAllCourses().ToList());
-        }
-        //TODO: Mule
-        public ActionResult Delete(IEnumerable<int> courseIdToDelete)
-        {
-            int localCourseIdToDlete = 1;
-            
             db.courses.RemoveRange(db.courses.Where(x => courseIdToDelete.Contains(x.CourseId)).ToList());
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult Details(int? id)
+        //TODO:DONE
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Course course = SelectACourse(id);
             if (course == null)
             {
@@ -92,37 +103,21 @@ namespace SchoolSystem.Controllers
             }
             return View(course);
         }
+        //TODO:DONE
+        [ActionName("AddCourse")]
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
-        // the ff method will work as far as the js is enabled at the client.
-        // it validated by sending anonymous AJAX call to the server. 
-        public JsonResult IsTitleExist(string title)
-        {
-            return Json(!db.courses.Any(x => x.Title == title), JsonRequestBehavior.AllowGet);
-            // (!db.courses.Any(x => title.Equals(x.Title, StringComparison.OrdinalIgnoreCase))
-        }
+        //TODO:DONE
+        [ActionName("AddCourse")]
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,Price,Credit")] Course course)
         {
             // #90 Server Side Validation 
             // the below code was disabled after the RemoteClient attribute was added.
-            /*if (db.courses.Any(x => x.Title == course.Title))
-            {
-                ModelState.AddModelError("Title","Title is already in use");
-            }*/
-            try
-            {
-                ValidateCourseTitle(course.Title);
-            }
-            catch (InvalidNameException ex)
-            {
-                Response.Write(ex.Message);
-                throw;
-            }
-
-            DbModels.Model.Course courseToEdit = new DbModels.Model.Course
+            /*if (db.courses.Any(x => x.Title == course.Title)){ ModelState.AddModelError("Title","Title is already in use");}*/
+            var courseToEdit = new DbModels.Model.Course
             {
                 CourseId = course.CourseId,
                 Title = course.Title,
@@ -136,14 +131,11 @@ namespace SchoolSystem.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(courseToEdit);
+            return View("Create", courseToEdit);
         }
-        public ActionResult Edit(int? id)
+        //TODO:DONE
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Course course = SelectACourse(id);
             if (course == null)
             {
@@ -152,24 +144,30 @@ namespace SchoolSystem.Controllers
             return View(course);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CourseId,Title,Credit,Price")] Course course)
+        public ActionResult Edit([Bind(/*Exclude = "Title",*/ Include = "CourseId,Title,Credit,Price")] SchoolSystem.DbModels.Model.Course course)
         {
+
+            //TODO: bug code was added to handle title while editing
+            /*string currentTitle=String.Empty;
+           foreach (var v in db.courses.Where(x => x.CourseId == course.CourseId)){currentTitle = v.Title;}
+           var c= new Course(){
+               CourseId = course.CourseId,
+               Title= currentTitle,
+               Credit = course.Credit,
+               Price = course.Price
+           };*/
             if (ModelState.IsValid)
             {
-
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ModelState.AddModelError("", "Please check fields for errors");
             return View(course);
         }
-        [HttpPost]
-        public ActionResult Delete(int? id)
+        //TODO:DONE
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Course course = SelectACourse(id);
             if (course == null)
             {
@@ -180,35 +178,39 @@ namespace SchoolSystem.Controllers
         [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            DbModels.Model.Course course = db.courses.FirstOrDefault(x => x.CourseId == id);
+            var course = db.courses.FirstOrDefault(x => x.CourseId == id);
             db.courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        //TODO: Mule
-        public static void ValidateCourseTitle(string name)
-        {
-            Regex regex = new Regex("^[a-zA-Z]+ $");
-            if (regex.IsMatch(name))
-                throw new InvalidNameException(name);
-        }
+        //TODO:DONE
+        /// <summary>
+        /// List of all courses from the database
+        /// </summary>
+        /// <returns>List<Course>CourseId,Title,Credit , Price </Course></returns>
         public List<Course> SelectAllCourses()
         {
             var listOfCourses = new List<Course>();
             foreach (var course in db.courses.ToList())
             {
                 listOfCourses.Add(new Course()
-                    {
-                        CourseId = course.CourseId,
-                        Title = course.Title,
-                        Credit = course.Credit,
-                        Price = course.Price
-                    }
+                {
+                    CourseId = course.CourseId,
+                    Title = course.Title,
+                    Credit = course.Credit,
+                    Price = course.Price
+                }
                 );
             }
             return listOfCourses;
         }
-        public Course SelectACourse(int? id)
+        //TODO:DONE
+        /// <summary>
+        /// Return a Course Object matching the id passed
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A course Object</returns>
+        public Course SelectACourse(int id)
         {
             var course = db.courses.FirstOrDefault(x => x.CourseId == id);
             return new Course()
@@ -219,6 +221,17 @@ namespace SchoolSystem.Controllers
                 Price = course.Price
             };
         }
+        //TODO:DONE
+        /// <summary>
+        /// the ff method will work as far as the js is enabled at the client.validated by sending anonymous AJAX call to the server. 
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public JsonResult IsTitleExist(string title)
+        {
+            return Json(!db.courses.Any(x => x.Title == title), JsonRequestBehavior.AllowGet);
+            // (!db.courses.Any(x => title.Equals(x.Title, StringComparison.OrdinalIgnoreCase))
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -227,6 +240,5 @@ namespace SchoolSystem.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

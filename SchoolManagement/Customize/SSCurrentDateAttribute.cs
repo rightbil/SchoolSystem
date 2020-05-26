@@ -8,11 +8,10 @@ using System.Web;
 namespace SchoolSystem.Customize
 {
     public class SsCurrentDateAttribute : ValidationAttribute
-
     {
         public override bool IsValid(object value)
         {
-            return (DateTime)value <= DateTime.Now ? true : false;
+            return (DateTime)value <= DateTime.Today ? true : false;
         }
     }
 }

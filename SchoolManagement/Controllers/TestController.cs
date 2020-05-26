@@ -9,9 +9,8 @@ namespace SchoolSystem.Controllers
 {
     public class TestController : Controller
     {
-        private SchoolDbContext db = new SchoolDbContext();
+        private readonly SchoolDbContext db = new SchoolDbContext();
         [HttpGet]
-        
         //TODO: RadioButton
         public ActionResult Index()
         {
@@ -25,7 +24,6 @@ namespace SchoolSystem.Controllers
             else
                 return "you have selected : " + c.SelectedDepartment;
         }
-       
         //TODO: ListBox
         [HttpGet]
         public ActionResult ListBox()
@@ -59,32 +57,31 @@ namespace SchoolSystem.Controllers
                 return sb.ToString();
             }
         }
-
         //TODO: MetadataType
-
         public ActionResult DisplayUrl()
         {
             //Mule
          return View(db.students.ToList());
         }
-
         public ActionResult Layout()
         {
             
             return View();
         }
-
         //ChildActionOnly
-
         public ActionResult ActionFilter()
         {
             return View();
         }
-
         public ActionResult ChildActionOnly(List<string> argName)
         {
 
             return View(argName);
+        }
+
+        public ActionResult TestModel()
+        {
+            return View();
         }
     }
 }

@@ -9,7 +9,8 @@ namespace SchoolSystem.DbModels.Model
     [Table("tblInstructor")]
     public class Instructor
     {
-        [Key, Column("Instructor ID")] public int InstructorId { get; set; }
+        [Key, Column("Instructor ID")]
+        public int InstructorId { get; set; }
 
         [Column("Last Name"), StringLength(20), Required]
         public string LastName { get; set; }
@@ -17,14 +18,13 @@ namespace SchoolSystem.DbModels.Model
         [Column("First Name"), StringLength(20), Required]
         public string FirstName { get; set; }
 
-        [Column("Hire Date"), Required] 
-        public DateTime? HireDate { get; set; }
-        public Gender Gender { get; set; }
+        [Column("Hire Date", TypeName="Date"), Required]
+        public DateTime? HireDate { get; set; } = DateTime.Today;
+        public string Gender { get; set; }
 
-        //Foreign Keys
         public int DepartmentId { get; set; }
         public Department Department { get; set; }
-       
+
         public int CourseId { get; set; }
         public Course Course { get; set; }
         // Mule public int Department_DepartmentId { get; set; }
@@ -60,9 +60,7 @@ namespace SchoolSystem.DbModels.Model
 
     public enum Gender
     {
-        Male = 0,
-        Female = 1,
-        Unknown = -1
+        Male ,Female 
     };
 }
 
